@@ -1,23 +1,825 @@
 <!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClayPals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ClayPals: Toddler Puzzles — a claymation puzzle toy for ages 2–4</title>
+<meta name="description" content="Fit the clay puppy into his yard, then build him back from big pieces. 23 clay animals for 2–4 year olds. Free on the App Store — no ads, no scores, nothing collected.">
+<link rel="canonical" href="https://claypals.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ClayPals">
+<meta property="og:title" content="ClayPals — a claymation puzzle toy for 2–4 year olds">
+<meta property="og:description" content="Clay animals, and the words that name them. 23 claymation puzzles, free on the App Store. No ads, no scores, nothing collected.">
+<meta property="og:url" content="https://claypals.app/">
+<meta property="og:image" content="https://claypals.app/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A yellow clay puppy sitting in a green clay backyard, beside the word ClayPals.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ClayPals — a claymation puzzle toy for 2–4 year olds">
+<meta name="twitter:description" content="Clay animals, and the words that name them. Free on the App Store.">
+<meta name="twitter:image" content="https://claypals.app/assets/img/og-cover.jpg">
+
+<!-- Light is the default everywhere, regardless of the visitor's OS setting: the
+     app itself is warm cream and the page should look like the app. No
+     `media=(prefers-color-scheme)` variant here on purpose — a second, dark
+     theme-color would hand a dark-mode phone a dark browser chrome around a
+     light page. Dark stays available as an explicit opt-in via
+     :root[data-theme="dark"]. -->
+<meta name="theme-color" content="#f9efde">
+<meta name="apple-itunes-app" content="app-id=6794948298">
+<link rel="icon" href="assets/icon/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icon/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/baloo800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ss4-400.woff2" as="font" type="font/woff2" crossorigin>
+
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:#f2eade;
-       color:#4a3728;margin:0;min-height:100vh;display:grid;place-items:center;padding:32px;line-height:1.6}
-  main{max-width:34rem;text-align:center}
-  h1{font-size:2rem;margin:0 0 .5rem}
-  p{color:#6b5544}
-  a{color:#b8763a}
+/* ── Faces ─────────────────────────────────────────────────────────────── */
+@font-face{font-family:"Baloo 2";src:url(assets/fonts/baloo800.woff2) format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url(assets/fonts/baloo600.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url(assets/fonts/ss4-400.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url(assets/fonts/ss4-600.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+
+/* ── Tokens ────────────────────────────────────────────────────────────── */
+:root{
+  /* Every value below is lifted from the app: ClayPalette.swift, StorePalette
+     (ParentalGate.swift) and the tileColor entries in puzzles.json. */
+  --bg:#f9efde;            /* ClayPalette.cream */
+  --bg-sunk:#f2e1c8;       /* ClayPalette.warmSand */
+  --surface:#fefaf2;
+  --rim:#e3c9a8;           /* StorePalette.tileRim */
+  --ink:#4a3527;
+  --ink-body:#6b4f3b;      /* StorePalette.text */
+  --ink-soft:#7a6049;
+  --terra:#e07a5e;         /* StorePalette.buy */
+  --terra-press:#b85539;
+  --btn-bg:#b85539;
+  --btn-ink:#fff8ee;
+  --sky:#8cc6e8;           /* puzzles.json skyBlue — the app icon's ground */
+  --shelf:#d3b087;         /* ClayPalette.shelf */
+  --shelf-shadow:#7b5b3e;  /* ClayPalette.shelfShadow */
+  --star:#ffc94a;          /* StorePalette.star */
+  --cast:rgba(123,91,62,.20);
+  --cast-soft:rgba(123,91,62,.11);
+
+  --measure:34rem;
+  --gutter:clamp(20px,5vw,40px);
+  --section:clamp(64px,11vw,116px);
+  --radius:28px;
+}
+/* Dark palette — a dim room, not an inversion. Clay keeps its warmth.
+   OPT-IN ONLY. The `@media (prefers-color-scheme:dark)` block that used to sit
+   here was removed deliberately: a parent on a dark-mode phone was getting a
+   dark page for an app that is warm cream. The tokens in :root above are the
+   light ones and they are the default for everyone; dark applies only when
+   something explicitly stamps data-theme="dark" on <html>. If a dark rule is
+   ever added elsewhere in this file it must be scoped the same way — an
+   OS-driven media query anywhere leaves a half-dark page. */
+:root[data-theme="dark"]{
+  --bg:#241c15; --bg-sunk:#1a140e; --surface:#33261c; --rim:#4c3a2b;
+  --ink:#f7e9d4; --ink-body:#e2d1bb; --ink-soft:#bda68d;
+  --terra:#ea8b70; --terra-press:#f0a289;
+  --btn-bg:#e07a5e; --btn-ink:#2a1e15;
+  --shelf:#7b5b3e; --shelf-shadow:#120d09;
+  --cast:rgba(0,0,0,.42); --cast-soft:rgba(0,0,0,.28);
+}
+:root[data-theme="light"]{
+  --bg:#f9efde; --bg-sunk:#f2e1c8; --surface:#fefaf2; --rim:#e3c9a8;
+  --ink:#4a3527; --ink-body:#6b4f3b; --ink-soft:#7a6049;
+  --terra:#e07a5e; --terra-press:#b85539;
+  --btn-bg:#b85539; --btn-ink:#fff8ee;
+  --shelf:#d3b087; --shelf-shadow:#7b5b3e;
+  --cast:rgba(123,91,62,.20); --cast-soft:rgba(123,91,62,.11);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink-body);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--terra-press);text-underline-offset:.18em;text-decoration-thickness:.08em}
+a:hover{color:var(--terra)}
+:focus-visible{outline:3px solid var(--terra);outline-offset:3px;border-radius:6px}
+
+h1,h2,h3,.wordmark,.btn{font-family:"Baloo 2",ui-rounded,"Trebuchet MS",system-ui,sans-serif;font-weight:800;color:var(--ink);text-wrap:balance}
+h1{font-size:clamp(2.05rem,6.4vw,3.5rem);line-height:1.05;letter-spacing:-.015em;margin:0 0 .55em}
+h2{font-size:clamp(1.55rem,4.4vw,2.35rem);line-height:1.12;letter-spacing:-.012em;margin:0 0 .4em}
+h3{font-size:1.16rem;line-height:1.28;margin:0 0 .3em}
+p{margin:0 0 1.05em}
+p:last-child{margin-bottom:0}
+
+.label{
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:.72rem;font-weight:650;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 1.1em;
+}
+.lead{font-size:clamp(1.06rem,2.1vw,1.24rem);line-height:1.6;color:var(--ink-body)}
+
+.wrap{width:min(1080px,100% - var(--gutter)*2);margin-inline:auto}
+.prose{max-width:var(--measure)}
+section{padding-block:var(--section)}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;
+  background:var(--btn-bg);color:var(--btn-ink);
+  font-size:1.18rem;font-weight:800;letter-spacing:.005em;
+  padding:.78em 1.5em;border-radius:999px;text-decoration:none;
+  box-shadow:0 3px 0 rgba(0,0,0,.14), 0 12px 22px -8px var(--cast);
+  transition:transform .16s cubic-bezier(.2,.9,.3,1.4), box-shadow .16s ease, background-color .16s ease;
+}
+.btn:hover{color:var(--btn-ink);transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.14),0 18px 28px -10px var(--cast)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.14),0 6px 14px -8px var(--cast)}
+.btn .arrow{font-size:.9em;transform:translateY(.04em)}
+.btn-note{
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:.88rem;line-height:1.5;color:var(--ink-soft);margin:1.05em 0 0;max-width:26rem;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.masthead{padding-top:clamp(22px,4vw,34px)}
+.wordmark{display:inline-block;text-decoration:none}
+.wordmark img{width:clamp(148px,22vw,196px);height:auto}
+
+/* App icon beside the CTA, so the page and the store listing read as one
+   product. Corner radius matches how iOS renders a home-screen icon. */
+.cta-row{display:flex;align-items:center;gap:clamp(14px,2.5vw,20px);flex-wrap:wrap;margin:0 0 1.05em}
+.appicon{
+  width:74px;height:74px;flex:none;border-radius:23%;
+  box-shadow:0 3px 0 var(--cast-soft),0 10px 20px -10px var(--cast);
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero{padding-top:clamp(30px,6vw,52px);padding-bottom:clamp(48px,8vw,86px)}
+.hero-grid{display:grid;gap:clamp(38px,6vw,54px);align-items:center}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.02fr 1fr;gap:56px}}
+.hero h1{text-wrap:pretty}
+.hero .lead{max-width:38ch}
+@media (min-width:900px){.hero h1{max-width:15ch;text-wrap:balance}}
+
+/* The diorama: the scene as a photographed plate, the pal standing in it. */
+.diorama{position:relative;isolation:isolate;padding-bottom:clamp(26px,5vw,44px)}
+.plate{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:var(--sky);aspect-ratio:4/3;
+  box-shadow:0 2px 0 rgba(255,255,255,.5) inset, 0 22px 40px -18px var(--cast), 0 3px 10px -4px var(--cast-soft);
+}
+.plate img{width:100%;height:100%;object-fit:cover}
+.pal{
+  position:absolute;left:5%;bottom:0;width:41%;z-index:2;
+  filter:drop-shadow(0 14px 16px rgba(123,91,62,.32));
+  transform-origin:50% 100%;
+}
+.pal-shadow{
+  position:absolute;left:9%;bottom:calc(clamp(26px,5vw,44px) - 6px);width:40%;height:22px;
+  background:radial-gradient(ellipse at center,var(--cast) 0%,rgba(123,91,62,0) 70%);
+  z-index:1;
+}
+:root[data-theme="dark"] .pal-shadow{background:radial-gradient(ellipse at center,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 70%)}
+
+/* ── Steps ─────────────────────────────────────────────────────────────── */
+.band{background:var(--bg-sunk)}
+.steps{display:grid;gap:clamp(30px,5vw,44px);margin-top:clamp(34px,5vw,52px)}
+@media (min-width:820px){.steps{grid-template-columns:repeat(3,1fr);gap:38px}}
+.step{display:grid;gap:1rem;align-content:start}
+.step-art{
+  position:relative;border-radius:22px;background:var(--surface);
+  border:1px solid var(--rim);aspect-ratio:5/4;overflow:hidden;
+  display:grid;place-items:center;
+}
+/* Absolute so the percentage box is definite — a grid row auto-sizes, and a
+   percentage height against it silently falls back to auto and overflows. */
+.step-art img{position:absolute;inset:0;width:100%;height:100%}
+.step-art.bleed img{object-fit:cover}          /* scene composite, pre-cropped 5:4 */
+.step-art.inset img{object-fit:contain;padding:18px}   /* cutout, with air around it */
+/* Moving panels ride in exactly the same box as the stills — same 5:4 card,
+   same 22px radius, same 1px rim, clipped by the card's own overflow:hidden —
+   so the three cards still read as one set. Both clips are authored 5:4, so
+   `cover` crops nothing; it is here to guarantee the fill if a re-encode ever
+   drifts. Absolute for the same reason the images are: a percentage height
+   against an auto-sized grid row silently falls back to auto and overflows. */
+.step-art video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg-sunk)}
+.step-art--slide,.step-art--build{background:var(--shelf)}
+.step-art--word{background:var(--bg)}
+.step-num{
+  display:inline-grid;place-items:center;width:2rem;height:2rem;flex:none;
+  background:var(--star);color:#4a3527;border-radius:50%;
+  font-family:"Baloo 2",ui-rounded,system-ui,sans-serif;font-weight:800;font-size:.98rem;
+  box-shadow:0 2px 0 rgba(0,0,0,.10);
+}
+.step-head{display:flex;align-items:center;gap:.65rem}
+.step-head h3{margin:0}
+.step p{font-size:1rem;color:var(--ink-body)}
+
+/* Word card — the app's clay name card, rebuilt in CSS. It now sits OVER the
+   completion film rather than on an empty panel, which is what the app itself
+   does: the card appears on top of the playing clip. Pushed to the bottom of
+   the card so it never covers the puppy, and given a soft drop shadow on top
+   of its clay ledge so it separates from the grass behind it. */
+.wordcard{
+  background:var(--shelf);border-radius:16px;padding:.55em .9em;
+  box-shadow:0 4px 0 var(--shelf-shadow);display:flex;gap:.18em;
+}
+.step-art--word .wordcard{
+  position:relative;z-index:1;align-self:end;margin-bottom:7%;
+  box-shadow:0 4px 0 var(--shelf-shadow), 0 10px 24px rgba(0,0,0,.28);
+}
+.wordcard span{
+  font-family:"Baloo 2",ui-rounded,system-ui,sans-serif;font-weight:800;
+  font-size:clamp(2rem,4.4vw,2.9rem);line-height:1.1;color:#fff8ee;
+  text-shadow:0 2px 0 rgba(123,91,62,.45);
+}
+
+/* ── Quiet section ─────────────────────────────────────────────────────── */
+.quiet-statement{font-size:clamp(1.9rem,5.6vw,2.9rem)}
+.quiet-sub{font-size:clamp(1.08rem,2.4vw,1.3rem);max-width:32rem;color:var(--ink-body)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:clamp(30px,5vw,44px) 0 0;padding:0;list-style:none}
+.chips li{
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:.94rem;font-weight:600;color:var(--ink);
+  background:var(--surface);border:1px solid var(--rim);
+  padding:.46em .95em;border-radius:999px;
+  box-shadow:0 2px 0 var(--cast-soft);
+}
+.chips li b{font-weight:800;color:var(--terra-press)}
+
+.proofs{display:grid;gap:clamp(22px,3.5vw,28px);margin-top:clamp(38px,6vw,58px)}
+@media (min-width:760px){.proofs{grid-template-columns:repeat(3,1fr)}}
+.proof{
+  background:var(--surface);border:1px solid var(--rim);border-radius:22px;
+  padding:clamp(20px,3vw,26px);box-shadow:0 3px 0 var(--cast-soft);
+}
+.proof h3{margin-bottom:.45em}
+.proof p{font-size:.99rem;margin:0}
+.pace{margin-top:clamp(30px,4vw,42px);font-size:1.1rem;color:var(--ink-soft);max-width:30rem}
+
+/* ── Shelf of animals ──────────────────────────────────────────────────── */
+.shelf{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,2.4vw,22px);margin-top:clamp(36px,5vw,52px);padding:0;list-style:none}
+.shelf li{flex:0 1 100px;max-width:150px;text-align:center}  /* 3 across at 390px */
+@media (min-width:560px){.shelf li{flex-basis:132px}}
+/* 114px lands 8 per row at full width, so 23 breaks 8·8·7 rather than 7·7·7·2. */
+@media (min-width:900px){.shelf li{flex-basis:114px}}
+.tile{
+  position:relative;aspect-ratio:1;border-radius:26%;
+  display:grid;place-items:center;padding:9%;
+  box-shadow:0 3px 0 var(--cast-soft),0 10px 18px -12px var(--cast);
+}
+.tile::after{
+  content:"";position:absolute;inset:auto 14% 8% 14%;height:9%;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(90,62,40,.22) 0%,rgba(90,62,40,0) 72%);
+}
+.tile img{position:relative;z-index:1;width:100%}
+.tile .free{
+  position:absolute;z-index:2;top:-7px;right:-5px;
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:.63rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  background:var(--star);color:#4a3527;padding:.28em .6em;border-radius:999px;
+  box-shadow:0 2px 0 rgba(123,91,62,.28);
+}
+.shelf .name{
+  display:block;margin-top:.6em;
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:.8rem;font-weight:600;letter-spacing:.03em;color:var(--ink-soft);
+}
+
+/* ── Price ─────────────────────────────────────────────────────────────── */
+.price-card{
+  background:var(--surface);border:1px solid var(--rim);border-radius:var(--radius);
+  padding:clamp(26px,5vw,44px);box-shadow:0 4px 0 var(--cast-soft);
+  max-width:44rem;
+}
+.price-split{display:grid;gap:clamp(20px,3vw,30px);margin:0 0 1.6em;padding:0;list-style:none}
+@media (min-width:640px){.price-split{grid-template-columns:1fr 1fr;gap:34px}}
+.price-split h3{margin-bottom:.25em}
+.price-split .amount{
+  font-family:"Baloo 2",ui-rounded,system-ui,sans-serif;font-weight:800;
+  font-size:1.9rem;color:var(--ink);line-height:1.1;display:block;margin-bottom:.18em;
+}
+.price-split p{font-size:.99rem;margin:0}
+.fineprint{font-size:.95rem;color:var(--ink-soft);border-top:1px solid var(--rim);padding-top:1.3em;margin-top:0}
+
+/* ── Closing + footer ──────────────────────────────────────────────────── */
+.closing{text-align:center;padding-top:clamp(38px,6vw,72px)}
+.closing .btn{margin-top:.8em}
+.closing .btn-note{margin-inline:auto}
+footer{
+  background:var(--bg-sunk);padding-block:clamp(44px,7vw,68px);
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:.92rem;color:var(--ink-soft);
+}
+footer p{max-width:34rem}
+.footlinks{display:flex;flex-wrap:wrap;gap:.5em 1.5em;margin:1.6em 0 1.6em;padding:0;list-style:none}
+.footlinks a{font-weight:600}
+.colophon{font-size:.84rem;color:var(--ink-soft)}
+
+/* ── Motion ────────────────────────────────────────────────────────────── */
+.js .reveal{opacity:0;transform:translateY(16px)}
+.js .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.22,.8,.3,1)}
+.js .shelf li{opacity:0;transform:translateY(12px) scale(.96)}
+.js .shelf li.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.22,.9,.3,1.15);transition-delay:calc(var(--i) * 26ms)}
+.shelf li .tile{transition:transform .22s cubic-bezier(.2,.9,.3,1.5)}
+.shelf li:hover .tile{transform:translateY(-5px) rotate(-1.4deg)}
+
+/* One orchestrated arrival: the plate settles, then the pal drops into it. */
+.js .plate{animation:plate-in .7s cubic-bezier(.22,.8,.3,1) both}
+.js .pal{animation:pal-drop .78s cubic-bezier(.3,.7,.4,1) .34s both}
+.js .pal-shadow{animation:shadow-in .5s ease .82s both}
+@keyframes plate-in{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes pal-drop{
+  0%{opacity:0;transform:translateY(-38%) scaleY(1.06) scaleX(.96)}
+  55%{opacity:1}
+  72%{transform:translateY(0) scaleY(.90) scaleX(1.07)}
+  86%{transform:translateY(0) scaleY(1.04) scaleX(.98)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes shadow-in{from{opacity:0}to{opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-delay:0ms !important;transition-duration:.001ms !important}
+  .js .reveal,.js .shelf li{opacity:1;transform:none}
+  /* Looping video is motion too, and this is a page about a calm product. The
+     poster takes the video's place — same frame, same box, so the card is not
+     visibly emptier, it just stops moving. The inline script after the steps
+     is what stops the file being DOWNLOADED; this rule is what stops it being
+     SEEN, and it holds with JavaScript off. */
+  .step-art video{display:none}
+  .step-art--slide{background:url(assets/img/slide-dog-poster.webp) center/cover no-repeat}
+  .step-art--build{background:url(assets/img/build-dog-poster.webp) center/cover no-repeat}
+  .step-art--word{background:url(assets/img/word-dog-poster.webp) center/cover no-repeat}
+}
 </style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js");</script>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="./">
+      <img src="assets/img/wordmark-320.webp"
+           srcset="assets/img/wordmark-320.webp 320w, assets/img/wordmark-560.webp 560w"
+           sizes="(min-width:900px) 196px, 22vw"
+           width="320" height="83" alt="ClayPals" fetchpriority="high" decoding="async">
+    </a>
+  </div>
+</header>
+
 <main>
-  <h1>ClayPals</h1>
-  <p>Handmade claymation puzzle toys for toddlers. No ads, no subscriptions,
-     no data collected, and they never listen.</p>
-  <p style="margin-top:1.5rem"><strong>ClayPals: Toddler Puzzles</strong><br>
-     <span style="font-size:.95rem">Clay animal words for kids 2+</span><br>
-     <a href="privacy.html">Privacy Policy</a></p>
-  <p style="margin-top:1.25rem"><strong>ClayPals: Fruits &amp; Veggies</strong><br>
-     <span style="font-size:.95rem">Clay food words for kids 2+</span><br>
-     <a href="produce/privacy.html">Privacy Policy</a></p>
+  <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">Free on the App&nbsp;Store · iPhone &amp; iPad · Ages&nbsp;2–4</p>
+        <h1>Clay animals, and the words that name them.</h1>
+        <p class="lead">ClayPals is a claymation puzzle toy for two-, three- and four-year-olds.
+          Twenty-three clay animals, each with its own little world. Finish a pal and it says
+          its own name out loud, spells it, and says it again.</p>
+        <div class="cta-row">
+          <img class="appicon" src="assets/icon/icon-160.webp" width="160" height="160"
+               decoding="async" alt="The ClayPals app icon: a yellow clay puppy on a sky-blue ground.">
+          <a class="btn" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
+            Download free <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <p class="btn-note">Three animals free forever. No ads, no subscription, no accounts,
+          and nothing about your child is collected.</p>
+      </div>
+
+      <div class="diorama">
+        <div class="plate">
+          <img src="assets/img/hero-scene-960.webp"
+               srcset="assets/img/hero-scene-960.webp 960w, assets/img/hero-scene-1440.webp 1440w"
+               sizes="(min-width:900px) 46vw, 92vw"
+               width="960" height="717" fetchpriority="high" decoding="async"
+               alt="A clay backyard scene: green modelling-clay grass, a red dog house with a blue roof, a smiling sun and soft white clouds.">
+        </div>
+        <div class="pal-shadow" aria-hidden="true"></div>
+        <img class="pal" src="assets/img/hero-dog-440.webp"
+             srcset="assets/img/hero-dog-440.webp 440w, assets/img/hero-dog-640.webp 640w"
+             sizes="(min-width:900px) 22vw, 44vw"
+             width="440" height="604" decoding="async"
+             alt="A yellow clay puppy sitting up, ready to be dropped into the scene.">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it plays ──────────────────────────────────────────────────── -->
+  <section class="band">
+    <div class="wrap">
+      <div class="prose reveal">
+        <p class="label">How a pal goes together</p>
+        <h2>Two gentle puzzles, then the word.</h2>
+        <p class="lead">The same three beats every time, in the same order, for every animal.
+          Nothing is timed, and a puzzle waits as long as they need.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <!-- The dog, not the penguin. The three cards are one sentence — slide
+               the dog home, build the dog back, the dog says its word — and
+               changing the subject halfway breaks it. Variety is the roster
+               section's job; it shows all 23.
+               On the deliberate overlap with the hero: the hero DROPS a bare
+               cutout from above onto a bare scene. This is the app itself —
+               the whole pal travelling SIDEWAYS off the shelf into a silhouette,
+               with the tray and the home button in frame. Same dog, different
+               axis, different context, so the two read as one motif rather than
+               one animation played twice. -->
+          <div class="step-art step-art--slide">
+            <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
+                   poster="assets/img/slide-dog-poster.webp"
+                   aria-label="The whole clay puppy slid off the shelf and into his own outline in the sunny backyard, where he settles with a little bounce.">
+              <source src="assets/video/slide-dog.webm" type="video/webm">
+              <source src="assets/video/slide-dog.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="step-head"><span class="step-num" aria-hidden="true">1</span><h3>Slide the animal home</h3></div>
+          <p>The puppy into the sunny backyard, the penguin onto the ice, the octopus into the
+            reef. One big target, generous snapping, no rotation to fight with — and no wrong
+            answers to get.</p>
+        </li>
+        <li class="step reveal">
+          <!-- The still that used to sit here showed the puppy mid-split, and it
+               read as a rendering glitch rather than as puzzle pieces. This is the
+               real Layer 2, recorded off the app: three pieces lifted from the
+               shelf and pressed into the silhouette. `muted` AND `playsinline` are
+               both load-bearing — iOS Safari refuses to autoplay without either,
+               and a parent opening this from a text message is the case that
+               matters most. WebM first so Chrome and Firefox take the smaller
+               file; Safari falls through to the H.264 MP4. -->
+          <div class="step-art step-art--build">
+            <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
+                   poster="assets/img/build-dog-poster.webp"
+                   aria-label="The clay puppy's three pieces — body, head and paws — lifted one at a time from the shelf and pressed into his silhouette until he is whole again.">
+              <source src="assets/video/build-dog.webm" type="video/webm">
+              <source src="assets/video/build-dog.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="step-head"><span class="step-num" aria-hidden="true">2</span><h3>Build it back</h3></div>
+          <p>The pal splits into three or four big clay pieces, sized for a two-year-old's grip.
+            A wiggle, a satisfying pop, and it's whole again. A piece in the wrong place just
+            springs back.</p>
+        </li>
+        <li class="step reveal">
+          <!-- The dog completion film the app itself plays, straight from the
+               bundle (ClayPals/Resources/video/dog_completion.mp4), transcoded off
+               HEVC because Chrome and Firefox will not decode it. The word card
+               stays on top rather than being replaced by the film: the panel is
+               about the WORD, and card-over-film is exactly what a child sees. -->
+          <div class="step-art step-art--word">
+            <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
+                   poster="assets/img/word-dog-poster.webp"
+                   aria-label="The finished clay puppy trotting across his sunny backyard after his name is read out.">
+              <source src="assets/video/word-dog.webm" type="video/webm">
+              <source src="assets/video/word-dog.mp4" type="video/mp4">
+            </video>
+            <div class="wordcard" aria-hidden="true"><span>D</span><span>O</span><span>G</span></div>
+          </div>
+          <div class="step-head"><span class="step-num" aria-hidden="true">3</span><h3>Then it says the word</h3></div>
+          <p>The finished pal says its own name out loud. The letters are named one at a time on
+            a little clay card, then the whole word again. A few seconds of print — never a quiz,
+            and a parent can switch it off in one tap.</p>
+        </li>
+      </ol>
+      <script>
+      /* prefers-reduced-motion, the download half. The media query above hides
+         the two panel videos, but `autoplay` has already told the browser to go
+         and fetch them — hiding an element does not cancel that. Removing the
+         <source> children and calling load() aborts the selection before the
+         response lands, so a visitor who has asked for less motion also pays
+         none of the bytes for it.
+         This runs inline, immediately after the elements it edits, rather than
+         from the script at the end of the body: by then the fetch is already in
+         flight. Guarded on matchMedia so an old browser simply keeps playing. */
+      (function () {
+        if (!window.matchMedia || !matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var vids = document.querySelectorAll(".steps video");
+        for (var i = 0; i < vids.length; i++) {
+          var v = vids[i];
+          v.removeAttribute("autoplay");
+          while (v.firstElementChild) v.removeChild(v.firstElementChild);
+          v.pause();
+          v.load();
+        }
+      })();
+      </script>
+    </div>
+  </section>
+
+  <!-- ── The quiet one ─────────────────────────────────────────────────── -->
+  <section>
+    <div class="wrap">
+      <div class="prose reveal">
+        <p class="label">What's not in it</p>
+        <h2 class="quiet-statement">It's the quiet one.</h2>
+        <p class="quiet-sub">No ads, no scores, no streaks, nothing collected — and after one
+          purchase it never asks you for anything again.</p>
+      </div>
+
+      <ul class="chips reveal">
+        <li><b>No</b> ads</li>
+        <li><b>No</b> scores</li>
+        <li><b>No</b> streaks</li>
+        <li><b>No</b> timers</li>
+        <li><b>No</b> notifications</li>
+        <li><b>No</b> accounts</li>
+        <li><b>No</b> microphone</li>
+        <li><b>No</b> data collected</li>
+        <li><b>No</b> links out of the app</li>
+        <li><b>No</b> way to lose</li>
+      </ul>
+
+      <div class="proofs">
+        <div class="proof reveal">
+          <h3>It respects your room</h3>
+          <p>Flip the hardware mute switch and ClayPals goes silent. Start a podcast and it plays
+            politely underneath instead of taking over your audio. The background music is quiet
+            by default and switches off in one tap.</p>
+        </div>
+        <div class="proof reveal">
+          <h3>The same four seconds, every time</h3>
+          <p>Every celebration is one continuous four-second clip — no cuts, no music sting, no
+            flashing. The same gentle moment for that animal, however many times it is finished.</p>
+        </div>
+        <div class="proof reveal">
+          <h3>Nothing leaves the device</h3>
+          <p>No analytics, no tracking, no accounts, no microphone and no speech recognition —
+            ClayPals never listens. It plays fully in airplane mode. Apple privacy label:
+            Data Not Collected.</p>
+        </div>
+      </div>
+
+      <p class="pace reveal">Big pieces for little fingers. No time limits, no wrong answers,
+        nothing to fall behind on — a puzzle waits as long as they need.</p>
+    </div>
+  </section>
+
+  <!-- ── The 23 ────────────────────────────────────────────────────────── -->
+  <section class="band">
+    <div class="wrap">
+      <div class="prose reveal">
+        <p class="label">The roster</p>
+        <h2>Twenty-three pals, twenty-three little worlds.</h2>
+        <p class="lead">Farm, pond, savanna, ocean, night forest, coral reef. The dog, the duck
+          and the cow are free forever.</p>
+      </div>
+      <ul class="shelf" id="shelf">
+        <li style="--i:0">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <span class="free">Free</span>
+            <img src="assets/img/animals/dog.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay dog.">
+          </div>
+          <span class="name">Dog</span>
+        </li>
+        <li style="--i:1">
+          <div class="tile" style="background:rgb(150,165,225)">
+            <span class="free">Free</span>
+            <img src="assets/img/animals/duck.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay duck.">
+          </div>
+          <span class="name">Duck</span>
+        </li>
+        <li style="--i:2">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <span class="free">Free</span>
+            <img src="assets/img/animals/cow.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay cow.">
+          </div>
+          <span class="name">Cow</span>
+        </li>
+        <li style="--i:3">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="assets/img/animals/lion.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay lion.">
+          </div>
+          <span class="name">Lion</span>
+        </li>
+        <li style="--i:4">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <img src="assets/img/animals/elephant.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay elephant.">
+          </div>
+          <span class="name">Elephant</span>
+        </li>
+        <li style="--i:5">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="assets/img/animals/penguin.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay penguin.">
+          </div>
+          <span class="name">Penguin</span>
+        </li>
+        <li style="--i:6">
+          <div class="tile" style="background:rgb(150,165,225)">
+            <img src="assets/img/animals/octopus.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay octopus.">
+          </div>
+          <span class="name">Octopus</span>
+        </li>
+        <li style="--i:7">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <img src="assets/img/animals/owl.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay owl.">
+          </div>
+          <span class="name">Owl</span>
+        </li>
+        <li style="--i:8">
+          <div class="tile" style="background:rgb(205,150,110)">
+            <img src="assets/img/animals/bunny.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay bunny.">
+          </div>
+          <span class="name">Bunny</span>
+        </li>
+        <li style="--i:9">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="assets/img/animals/bear.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay bear.">
+          </div>
+          <span class="name">Bear</span>
+        </li>
+        <li style="--i:10">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <img src="assets/img/animals/frog.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay frog.">
+          </div>
+          <span class="name">Frog</span>
+        </li>
+        <li style="--i:11">
+          <div class="tile" style="background:rgb(246,216,120)">
+            <img src="assets/img/animals/turtle.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay turtle.">
+          </div>
+          <span class="name">Turtle</span>
+        </li>
+        <li style="--i:12">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="assets/img/animals/giraffe.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay giraffe.">
+          </div>
+          <span class="name">Giraffe</span>
+        </li>
+        <li style="--i:13">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <img src="assets/img/animals/monkey.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay monkey.">
+          </div>
+          <span class="name">Monkey</span>
+        </li>
+        <li style="--i:14">
+          <div class="tile" style="background:rgb(248,190,150)">
+            <img src="assets/img/animals/whale.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay whale.">
+          </div>
+          <span class="name">Whale</span>
+        </li>
+        <li style="--i:15">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="assets/img/animals/butterfly.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay butterfly.">
+          </div>
+          <span class="name">Butterfly</span>
+        </li>
+        <li style="--i:16">
+          <div class="tile" style="background:rgb(150,165,225)">
+            <img src="assets/img/animals/sheep.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay sheep.">
+          </div>
+          <span class="name">Sheep</span>
+        </li>
+        <li style="--i:17">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <img src="assets/img/animals/dino.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay dinosaur.">
+          </div>
+          <span class="name">Dinosaur</span>
+        </li>
+        <li style="--i:18">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="assets/img/animals/crab.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay crab.">
+          </div>
+          <span class="name">Crab</span>
+        </li>
+        <li style="--i:19">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <img src="assets/img/animals/flamingo.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay flamingo.">
+          </div>
+          <span class="name">Flamingo</span>
+        </li>
+        <li style="--i:20">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="assets/img/animals/snail.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay snail.">
+          </div>
+          <span class="name">Snail</span>
+        </li>
+        <li style="--i:21">
+          <div class="tile" style="background:rgb(150,165,225)">
+            <img src="assets/img/animals/kangaroo.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay kangaroo.">
+          </div>
+          <span class="name">Kangaroo</span>
+        </li>
+        <li style="--i:22">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <img src="assets/img/animals/peacock.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay peacock.">
+          </div>
+          <span class="name">Peacock</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Price ─────────────────────────────────────────────────────────── -->
+  <section>
+    <div class="wrap">
+      <div class="prose reveal">
+        <p class="label">The whole business model</p>
+        <h2>What's free, and what isn't.</h2>
+      </div>
+      <div class="price-card reveal">
+        <ul class="price-split">
+          <li>
+            <span class="amount">Free</span>
+            <h3>Dog, duck and cow</h3>
+            <p>Yours forever. Two full puzzles each, the word moment, every sound — no time
+              limit and no ads.</p>
+          </li>
+          <li>
+            <span class="amount">$4.99 once</span>
+            <h3>The other twenty animals</h3>
+            <p>One optional in-app purchase. Not a subscription, not coins, not a bundle —
+              there is nothing else to buy, ever.</p>
+          </li>
+        </ul>
+        <p class="fineprint">The purchase sits behind a parental gate a grown-up has to hold for
+          three seconds, and Family Sharing and Ask&nbsp;to&nbsp;Buy work as you would expect.
+          ClayPals is free to download, and the three free pals stay free whether you buy or not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Closing ───────────────────────────────────────────────────────── -->
+  <section class="closing">
+    <div class="wrap prose" style="margin-inline:auto">
+      <h2 class="reveal">Twenty-three pals are waiting.</h2>
+      <p class="reveal"><a class="btn" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
+        Download free on the App&nbsp;Store <span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="btn-note reveal">Requires iOS&nbsp;17 or later. iPhone and iPad. Works completely
+        offline — airplanes, waiting rooms, grandma's house.</p>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <p>ClayPals is made by a tiny independent studio. If something isn't right for your family,
+      email us — a human reads and answers every message.</p>
+    <ul class="footlinks">
+      <li><a href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">ClayPals on the App&nbsp;Store</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:support@claypals.app">support@claypals.app</a></li>
+    </ul>
+    <p class="colophon">ClayPals: Toddler Puzzles · Kai Ventures.
+      Also from us: ClayPals: Fruits &amp; Veggies (<a href="produce/privacy.html">privacy policy</a>).</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) {
+    document.querySelectorAll(".reveal,.shelf li").forEach(function(el){ el.classList.add("in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  document.querySelectorAll(".reveal,.shelf li").forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"MobileApplication",
+  "name":"ClayPals: Toddler Puzzles",
+  "operatingSystem":"iOS 17.0 or later",
+  "applicationCategory":"EducationalApplication",
+  "url":"https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298",
+  "description":"A claymation puzzle toy for 2–4 year olds. Fit the clay animal into its scene, then rebuild it from big pieces. 23 animals, no ads, no data collected.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+</body>
+</html>

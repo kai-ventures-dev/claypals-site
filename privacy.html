@@ -15,8 +15,12 @@
     --rim: #e3c9a8;
     --soft: #8a6f58;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
+  /* Dark palette — OPT-IN ONLY, matching index.html. The OS-driven
+     `@media (prefers-color-scheme: dark)` switch was removed on purpose so a
+     parent who taps through from the (now always-light) landing page does not
+     land on a dark policy page. Revert by restoring the media query if the
+     site ever goes back to following the OS. */
+  :root[data-theme="dark"] {
       --bg: #2a2119;
       --card: #352a20;
       --text: #e8d9c6;
@@ -24,7 +28,6 @@
       --accent: #e88f75;
       --rim: #55432f;
       --soft: #c2ab92;
-    }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -186,7 +189,7 @@
     <p><strong>Revoking consent, or asking us to delete something.</strong> Because the
     app collects nothing, there is no consent to withdraw and nothing of yours for us to
     erase. If you believe otherwise, or you simply want confirmation in writing, email
-    <a href="mailto:markjeromecr@gmail.com">markjeromecr@gmail.com</a> and we will
+    <a href="mailto:support@claypals.app">support@claypals.app</a> and we will
     respond — including with a written confirmation that we hold no data about you or
     your child.</p>
   </section>
@@ -201,7 +204,7 @@
   <section>
     <h2>Contact</h2>
     <p>Questions about this policy or the app? Email
-    <a href="mailto:markjeromecr@gmail.com">markjeromecr@gmail.com</a> —
+    <a href="mailto:support@claypals.app">support@claypals.app</a> —
     a human reads and answers every message.</p>
   </section>
 

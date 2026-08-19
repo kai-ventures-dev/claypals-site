@@ -1,6 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Analytics, consent-gated.
+     GA4 and the Meta Pixel are NOT loaded until a visitor accepts. Both set
+     cookies and send data to third parties, so ePrivacy/GDPR require prior
+     consent; loading them and asking afterwards is the thing that is not
+     allowed. The decision is remembered in localStorage.
+     Tag ids: GA G-KVS5B771EK / Pixel 1693906458397139. -->
+<script>
+(function () {
+  var KEY = 'claypals-analytics-consent';
+  var GA = 'G-KVS5B771EK', PIXEL = '1693906458397139';
+
+  function loadAnalytics() {
+    if (window.__claypalsAnalyticsLoaded) return;
+    window.__claypalsAnalyticsLoaded = true;
+
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
+    document.head.appendChild(g);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA);
+
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL);
+    fbq('track', 'PageView');
+  }
+
+  function remember(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) { /* private mode */ }
+  }
+
+  function dismiss(bar) {
+    bar.setAttribute('hidden', '');
+    bar.remove();
+  }
+
+  function ask() {
+    var bar = document.createElement('div');
+    bar.className = 'consent';
+    bar.setAttribute('role', 'dialog');
+    bar.setAttribute('aria-label', 'Counting visits');
+    bar.innerHTML =
+      '<p class="consent-copy">We would like to count visits to this page, using Google '
+      + 'and Meta, so we know whether anyone found it. <strong>The app itself still '
+      + 'collects nothing</strong> — this is only the website. '
+      + '<a href="privacy.html">What we measure</a>.</p>'
+      + '<div class="consent-row">'
+      + '<button type="button" class="consent-btn" data-consent="no">No thanks</button>'
+      + '<button type="button" class="consent-btn" data-consent="yes">That\u2019s fine</button>'
+      + '</div>';
+    document.body.appendChild(bar);
+
+    bar.addEventListener('click', function (ev) {
+      var choice = ev.target.getAttribute && ev.target.getAttribute('data-consent');
+      if (!choice) return;
+      remember(choice === 'yes' ? 'granted' : 'denied');
+      if (choice === 'yes') loadAnalytics();
+      dismiss(bar);
+    });
+  }
+
+  var stored;
+  try { stored = localStorage.getItem(KEY); } catch (e) { stored = null; }
+
+  if (stored === 'granted') { loadAnalytics(); }
+  else if (stored !== 'denied') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ask);
+    } else { ask(); }
+  }
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ClayPals: Toddler Puzzles — a claymation puzzle toy for ages 2–4</title>
@@ -355,6 +438,31 @@ footer p{max-width:34rem}
   .step-art--build{background:url(assets/img/build-dog-poster.webp) center/cover no-repeat}
   .step-art--word{background:url(assets/img/word-dog-poster.webp) center/cover no-repeat}
 }
+
+/* Consent bar. Same clay palette as the page — a cookie banner in default
+   browser chrome would look like it belonged to a different site. Accept and
+   decline are deliberately identical in weight: this page's whole argument is
+   that the product does not manipulate anyone, and a banner tuned to funnel
+   clicks would contradict the copy a few sections below it. */
+.consent{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);
+  z-index:60;width:min(560px,calc(100vw - 32px));
+  background:var(--surface);border:2px solid var(--rim);border-radius:20px;
+  box-shadow:0 10px 30px var(--cast-soft);padding:18px 20px;
+  display:flex;flex-direction:column;gap:14px}
+.consent-copy{margin:0;font-size:.95rem;line-height:1.55;color:var(--ink-body)}
+.consent-copy a{color:var(--ink);text-underline-offset:3px}
+.consent-row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.consent-btn{font:inherit;font-weight:600;cursor:pointer;
+  padding:10px 18px;border-radius:999px;border:2px solid var(--rim);
+  background:var(--bg);color:var(--ink);min-height:44px}
+.consent-btn:hover{background:var(--bg-sunk)}
+.consent-btn:focus-visible{outline:3px solid var(--star);outline-offset:2px}
+@media (max-width:420px){.consent-row{justify-content:stretch}
+  .consent-btn{flex:1}}
+@media (prefers-reduced-motion:no-preference){
+  .consent{animation:consent-in .32s cubic-bezier(.22,.8,.3,1) both}
+  @keyframes consent-in{from{opacity:0;transform:translate(-50%,10px)}
+    to{opacity:1;transform:translate(-50%,0)}}}
 </style>
 </head>
 <body>

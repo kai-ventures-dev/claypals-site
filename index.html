@@ -412,7 +412,7 @@ footer p{max-width:34rem}
         <div class="cta-row">
           <img class="appicon" src="assets/icon/icon-160.webp" width="160" height="160"
                decoding="async" alt="The ClayPals app icon: a yellow clay puppy on a sky-blue ground.">
-          <a class="btn" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
+          <a class="btn" data-cta="hero" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
             Download free <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <p class="btn-note">Three animals free forever. No ads, no subscription, no accounts,
@@ -799,7 +799,7 @@ footer p{max-width:34rem}
   <section class="closing">
     <div class="wrap prose" style="margin-inline:auto">
       <h2 class="reveal">Twenty-three pals are waiting.</h2>
-      <p class="reveal"><a class="btn" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
+      <p class="reveal"><a class="btn" data-cta="closing" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
         Download free on the App&nbsp;Store <span class="arrow" aria-hidden="true">→</span></a></p>
       <p class="btn-note reveal">Requires iOS&nbsp;17 or later. iPhone and iPad. Works completely
         offline — airplanes, waiting rooms, grandma's house.</p>
@@ -812,7 +812,7 @@ footer p{max-width:34rem}
     <p>ClayPals is made by a tiny independent studio. If something isn't right for your family,
       email us — a human reads and answers every message.</p>
     <ul class="footlinks">
-      <li><a href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">ClayPals on the App&nbsp;Store</a></li>
+      <li><a data-cta="footer" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">ClayPals on the App&nbsp;Store</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
       <li><a href="mailto:support@claypals.app">support@claypals.app</a></li>
     </ul>
@@ -834,6 +834,35 @@ footer p{max-width:34rem}
     });
   }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
   document.querySelectorAll(".reveal,.shelf li").forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script>
+/* Outbound App Store clicks -> Meta ViewContent + GA4 app_store_click.
+   Delegated so every link to apps.apple.com is covered, including any added
+   later. Both tags are optional at runtime: if an ad blocker stopped gtag.js
+   or fbevents.js from loading, the guards below keep the click working
+   normally instead of throwing on a missing global. */
+(function () {
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[href*="apps.apple.com"]');
+    if (!a) return;
+    var where = a.getAttribute('data-cta') || 'other';
+
+    if (typeof fbq === 'function') {
+      fbq('track', 'ViewContent');
+    }
+    if (typeof gtag === 'function') {
+      /* transport_type 'beacon' matters here: these links navigate in the same
+         tab, so a plain request can be cancelled as the page unloads. A beacon
+         is handed to the browser to deliver after we are gone. */
+      gtag('event', 'app_store_click', {
+        'event_category': 'outbound',
+        'event_label': where,
+        'transport_type': 'beacon'
+      });
+    }
+  }, true);
 })();
 </script>
 

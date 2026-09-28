@@ -31,23 +31,23 @@ src="https://www.facebook.com/tr?id=1693906458397139&ev=PageView&noscript=1"
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ClayPals: Toddler Puzzles — a claymation puzzle toy for ages 2–4</title>
-<meta name="description" content="Fit the clay puppy into his yard, then build him back from big pieces. 23 clay animals for 2–4 year olds. Free on the App Store — no ads, no scores, nothing collected.">
-<link rel="canonical" href="https://claypals.app/">
+<title>ClayPals: Fruits &amp; Veggies — a claymation puzzle toy for ages 2–4</title>
+<meta name="description" content="Slide the clay apple into its orchard, then build it back from big pieces. 28 clay fruits and vegetables for 2–4 year olds. Free on the App Store — no ads, no scores, nothing collected.">
+<link rel="canonical" href="https://claypals.app/produce/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ClayPals">
-<meta property="og:title" content="ClayPals — a claymation puzzle toy for 2–4 year olds">
-<meta property="og:description" content="Clay animals, and the words that name them. 23 claymation puzzles, free on the App Store. No ads, no scores, nothing collected.">
-<meta property="og:url" content="https://claypals.app/">
-<meta property="og:image" content="https://claypals.app/assets/img/og-cover.jpg">
+<meta property="og:title" content="ClayPals: Fruits &amp; Veggies — a claymation puzzle toy for 2–4 year olds">
+<meta property="og:description" content="Clay fruits and vegetables, and the words that name them. 28 claymation puzzles, free on the App Store. No ads, no scores, nothing collected.">
+<meta property="og:url" content="https://claypals.app/produce/">
+<meta property="og:image" content="https://claypals.app/assets/img/og-cover-produce.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A yellow clay puppy sitting in a green clay backyard, beside the word ClayPals.">
+<meta property="og:image:alt" content="A red clay apple in a green clay orchard, beside the word ClayPals.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ClayPals — a claymation puzzle toy for 2–4 year olds">
-<meta name="twitter:description" content="Clay animals, and the words that name them. Free on the App Store.">
-<meta name="twitter:image" content="https://claypals.app/assets/img/og-cover.jpg">
+<meta name="twitter:title" content="ClayPals: Fruits &amp; Veggies — a claymation puzzle toy for 2–4 year olds">
+<meta name="twitter:description" content="Clay fruits and vegetables, and the words that name them. Free on the App Store.">
+<meta name="twitter:image" content="https://claypals.app/assets/img/og-cover-produce.jpg">
 
 <!-- Light is the default everywhere, regardless of the visitor's OS setting: the
      app itself is warm cream and the page should look like the app. No
@@ -56,19 +56,19 @@ src="https://www.facebook.com/tr?id=1693906458397139&ev=PageView&noscript=1"
      light page. Dark stays available as an explicit opt-in via
      :root[data-theme="dark"]. -->
 <meta name="theme-color" content="#f9efde">
-<meta name="apple-itunes-app" content="app-id=6794948298">
-<link rel="icon" href="assets/icon/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/icon/apple-touch-icon.png">
+<meta name="apple-itunes-app" content="app-id=6798962112">
+<link rel="icon" href="../assets/icon/produce-favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/icon/produce-apple-touch-icon.png">
 
-<link rel="preload" href="assets/fonts/baloo800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/ss4-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/baloo800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/ss4-400.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
 /* ── Faces ─────────────────────────────────────────────────────────────── */
-@font-face{font-family:"Baloo 2";src:url(assets/fonts/baloo800.woff2) format("woff2");font-weight:800;font-style:normal;font-display:swap}
-@font-face{font-family:"Baloo 2";src:url(assets/fonts/baloo600.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:"Source Serif 4";src:url(assets/fonts/ss4-400.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Source Serif 4";src:url(assets/fonts/ss4-600.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url(../assets/fonts/baloo800.woff2) format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url(../assets/fonts/baloo600.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url(../assets/fonts/ss4-400.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url(../assets/fonts/ss4-600.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
 
 /* ── Tokens ────────────────────────────────────────────────────────────── */
 :root{
@@ -247,23 +247,24 @@ section{padding-block:var(--section)}
 .step-head h3{margin:0}
 .step p{font-size:1rem;color:var(--ink-body)}
 
-/* Word card — the app's clay name card, rebuilt in CSS. It now sits OVER the
-   completion film rather than on an empty panel, which is what the app itself
-   does: the card appears on top of the playing clip. Pushed to the bottom of
-   the card so it never covers the puppy, and given a soft drop shadow on top
-   of its clay ledge so it separates from the grass behind it. */
+/* Word card — the produce app's word card, rebuilt in CSS. This is NOT the
+   animals page's tan clay card: Fruits & Veggies shows a cream card with the
+   word in mixed case over a yellow crayon underline (App Store screenshot
+   04-word-moment, claypals-produce docs/release/screenshots). It sits over the
+   completion film, low and small, because the apple stands lower in its film
+   than the dog does in his, and a bigger card would cover its face. */
 .wordcard{
-  background:var(--shelf);border-radius:16px;padding:.55em .9em;
-  box-shadow:0 4px 0 var(--shelf-shadow);display:flex;gap:.18em;
+  background:var(--surface);border:1px solid var(--rim);border-radius:14px;
+  padding:.28em .8em .42em;
 }
 .step-art--word .wordcard{
-  position:relative;z-index:1;align-self:end;margin-bottom:7%;
-  box-shadow:0 4px 0 var(--shelf-shadow), 0 10px 24px rgba(0,0,0,.28);
+  position:relative;z-index:1;align-self:end;margin-bottom:4%;
+  box-shadow:0 3px 0 var(--cast-soft), 0 10px 24px rgba(0,0,0,.24);
 }
 .wordcard span{
-  font-family:"Baloo 2",ui-rounded,system-ui,sans-serif;font-weight:800;
-  font-size:clamp(2rem,4.4vw,2.9rem);line-height:1.1;color:#fff8ee;
-  text-shadow:0 2px 0 rgba(123,91,62,.45);
+  display:block;font-family:"Baloo 2",ui-rounded,system-ui,sans-serif;font-weight:800;
+  font-size:clamp(1.35rem,2.6vw,1.7rem);line-height:1.15;color:var(--ink);
+  border-bottom:3px solid var(--star);border-radius:2px;padding-bottom:.06em;
 }
 
 /* ── Quiet section ─────────────────────────────────────────────────────── */
@@ -289,12 +290,12 @@ section{padding-block:var(--section)}
 .proof p{font-size:.99rem;margin:0}
 .pace{margin-top:clamp(30px,4vw,42px);font-size:1.1rem;color:var(--ink-soft);max-width:30rem}
 
-/* ── Shelf of animals ──────────────────────────────────────────────────── */
+/* ── Shelf of foods ─────────────────────────────────────────────────────── */
 .shelf{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,2.4vw,22px);margin-top:clamp(36px,5vw,52px);padding:0;list-style:none}
 .shelf li{flex:0 1 100px;max-width:150px;text-align:center}  /* 3 across at 390px */
 @media (min-width:560px){.shelf li{flex-basis:132px}}
-/* 114px lands 8 per row at full width, so 23 breaks 8·8·7 rather than 7·7·7·2. */
-@media (min-width:900px){.shelf li{flex-basis:114px}}
+/* 128px lands 7 per row at full width, so 28 breaks 7·7·7·7 rather than 8·8·8·4. */
+@media (min-width:900px){.shelf li{flex-basis:128px}}
 .tile{
   position:relative;aspect-ratio:1;border-radius:26%;
   display:grid;place-items:center;padding:9%;
@@ -379,9 +380,7 @@ footer p{max-width:34rem}
      is what stops the file being DOWNLOADED; this rule is what stops it being
      SEEN, and it holds with JavaScript off. */
   .step-art video{display:none}
-  .step-art--slide{background:url(assets/img/slide-dog-poster.webp) center/cover no-repeat}
-  .step-art--build{background:url(assets/img/build-dog-poster.webp) center/cover no-repeat}
-  .step-art--word{background:url(assets/img/word-dog-poster.webp) center/cover no-repeat}
+  .step-art--word{background:url(../assets/img/word-apple-poster.webp) center/cover no-repeat}
 }
 </style>
 </head>
@@ -391,8 +390,8 @@ footer p{max-width:34rem}
 <header class="masthead">
   <div class="wrap">
     <a class="wordmark" href="./">
-      <img src="assets/img/wordmark-320.webp"
-           srcset="assets/img/wordmark-320.webp 320w, assets/img/wordmark-560.webp 560w"
+      <img src="../assets/img/wordmark-320.webp"
+           srcset="../assets/img/wordmark-320.webp 320w, ../assets/img/wordmark-560.webp 560w"
            sizes="(min-width:900px) 196px, 22vw"
            width="320" height="83" alt="ClayPals" fetchpriority="high" decoding="async">
     </a>
@@ -405,34 +404,34 @@ footer p{max-width:34rem}
     <div class="wrap hero-grid">
       <div>
         <p class="label">Free on the App&nbsp;Store · iPhone &amp; iPad · Ages&nbsp;2–4</p>
-        <h1>Clay animals, and the words that name them.</h1>
-        <p class="lead">ClayPals is a claymation puzzle toy for two-, three- and four-year-olds.
-          Twenty-three clay animals, each with its own little world. Finish a pal and it says
-          its own name out loud, spells it, and says it again.</p>
+        <h1>Clay fruits and veggies, and the words that name them.</h1>
+        <p class="lead">ClayPals: Fruits &amp; Veggies is a claymation puzzle toy for two-, three-
+          and four-year-olds. Twenty-eight clay fruits and vegetables, each in the place it grows.
+          Finish one and it says its own name out loud, then spells it.</p>
         <div class="cta-row">
-          <img class="appicon" src="assets/icon/icon-160.webp" width="160" height="160"
-               decoding="async" alt="The ClayPals app icon: a yellow clay puppy on a sky-blue ground.">
-          <a class="btn" data-cta="hero" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
+          <img class="appicon" src="../assets/icon/produce-icon-160.webp" width="160" height="160"
+               decoding="async" alt="The ClayPals: Fruits &amp; Veggies app icon: a red clay apple on a sky-blue ground.">
+          <a class="btn" data-cta="hero" href="https://apps.apple.com/us/app/claypals-fruits-veggies/id6798962112">
             Download free <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <p class="btn-note">Three animals free forever. No ads, no subscription, no accounts,
+        <p class="btn-note">Seven foods free forever. No ads, no subscription, no accounts,
           and nothing about your child is collected.</p>
       </div>
 
       <div class="diorama">
         <div class="plate">
-          <img src="assets/img/hero-scene-960.webp"
-               srcset="assets/img/hero-scene-960.webp 960w, assets/img/hero-scene-1440.webp 1440w"
+          <img src="../assets/img/hero-scene-apple-960.webp"
+               srcset="../assets/img/hero-scene-apple-960.webp 960w, ../assets/img/hero-scene-apple-1440.webp 1440w"
                sizes="(min-width:900px) 46vw, 92vw"
                width="960" height="717" fetchpriority="high" decoding="async"
-               alt="A clay backyard scene: green modelling-clay grass, a red dog house with a blue roof, a smiling sun and soft white clouds.">
+               alt="A clay orchard scene: green modelling-clay grass, a leafy apple tree, little yellow and pink flowers and soft white clouds.">
         </div>
         <div class="pal-shadow" aria-hidden="true"></div>
-        <img class="pal" src="assets/img/hero-dog-440.webp"
-             srcset="assets/img/hero-dog-440.webp 440w, assets/img/hero-dog-640.webp 640w"
+        <img class="pal" src="../assets/img/hero-apple-440.webp"
+             srcset="../assets/img/hero-apple-440.webp 440w, ../assets/img/hero-apple-640.webp 640w"
              sizes="(min-width:900px) 22vw, 44vw"
-             width="440" height="604" decoding="async"
-             alt="A yellow clay puppy sitting up, ready to be dropped into the scene.">
+             width="440" height="487" decoding="async"
+             alt="A smiling red clay apple, ready to be dropped into the scene.">
       </div>
     </div>
   </section>
@@ -441,83 +440,69 @@ footer p{max-width:34rem}
   <section class="band">
     <div class="wrap">
       <div class="prose reveal">
-        <p class="label">How a pal goes together</p>
+        <p class="label">How a food goes together</p>
         <h2>Two gentle puzzles, then the word.</h2>
-        <p class="lead">The same three beats every time, in the same order, for every animal.
+        <p class="lead">The same three beats every time, in the same order, for every food.
           Nothing is timed, and a puzzle waits as long as they need.</p>
       </div>
 
       <ol class="steps">
         <li class="step reveal">
-          <!-- The dog, not the penguin. The three cards are one sentence — slide
-               the dog home, build the dog back, the dog says its word — and
-               changing the subject halfway breaks it. Variety is the roster
-               section's job; it shows all 23.
-               On the deliberate overlap with the hero: the hero DROPS a bare
-               cutout from above onto a bare scene. This is the app itself —
-               the whole pal travelling SIDEWAYS off the shelf into a silhouette,
-               with the tray and the home button in frame. Same dog, different
-               axis, different context, so the two read as one motif rather than
-               one animation played twice. -->
-          <div class="step-art step-art--slide">
-            <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
-                   poster="assets/img/slide-dog-poster.webp"
-                   aria-label="The whole clay puppy slid off the shelf and into his own outline in the sunny backyard, where he settles with a little bounce.">
-              <source src="assets/video/slide-dog.webm" type="video/webm">
-              <source src="assets/video/slide-dog.mp4" type="video/mp4">
-            </video>
+          <!-- The apple throughout, as the animals page uses the dog throughout:
+               the three cards are one sentence about one food.
+               Panels 1 and 2 are STILLS for now — real App Store captures from
+               the iPad build (docs/release/screenshots/ipad-13/02 and 03 in
+               claypals-produce), cropped 5:4 at (440,214)-(2752,2064) so the home
+               button is fully out of frame rather than half in it. The animals
+               page plays simulator recordings here; the produce recordings are
+               owed (blocked on the Xcode licence, which stops simctl). When they
+               exist, swap each <img> for the same <video> block the animals page
+               uses, and keep these files as the posters. -->
+          <div class="step-art bleed">
+            <img src="../assets/img/slide-apple-poster.webp" width="640" height="512"
+                 loading="lazy" decoding="async"
+                 alt="The clay orchard with the apple's dark outline waiting on the grass, and the whole clay apple on the shelf beside it, ready to be slid home.">
           </div>
-          <div class="step-head"><span class="step-num" aria-hidden="true">1</span><h3>Slide the animal home</h3></div>
-          <p>The puppy into the sunny backyard, the penguin onto the ice, the octopus into the
-            reef. One big target, generous snapping, no rotation to fight with — and no wrong
+          <div class="step-head"><span class="step-num" aria-hidden="true">1</span><h3>Slide it home</h3></div>
+          <p>The apple into the orchard, the carrot into the garden bed, the grapes onto the
+            vine. One big target, generous snapping, no rotation to fight with — and no wrong
             answers to get.</p>
         </li>
         <li class="step reveal">
-          <!-- The still that used to sit here showed the puppy mid-split, and it
-               read as a rendering glitch rather than as puzzle pieces. This is the
-               real Layer 2, recorded off the app: three pieces lifted from the
-               shelf and pressed into the silhouette. `muted` AND `playsinline` are
-               both load-bearing — iOS Safari refuses to autoplay without either,
-               and a parent opening this from a text message is the case that
-               matters most. WebM first so Chrome and Firefox take the smaller
-               file; Safari falls through to the H.264 MP4. -->
-          <div class="step-art step-art--build">
-            <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
-                   poster="assets/img/build-dog-poster.webp"
-                   aria-label="The clay puppy's three pieces — body, head and paws — lifted one at a time from the shelf and pressed into his silhouette until he is whole again.">
-              <source src="assets/video/build-dog.webm" type="video/webm">
-              <source src="assets/video/build-dog.mp4" type="video/mp4">
-            </video>
+          <div class="step-art bleed">
+            <img src="../assets/img/build-apple-poster.webp" width="640" height="512"
+                 loading="lazy" decoding="async"
+                 alt="The apple's outline on the orchard grass, with its three big clay pieces waiting on the shelf to be pressed back into place.">
           </div>
           <div class="step-head"><span class="step-num" aria-hidden="true">2</span><h3>Build it back</h3></div>
-          <p>The pal splits into three or four big clay pieces, sized for a two-year-old's grip.
+          <p>The food splits into three or four big clay pieces, sized for a two-year-old's grip.
             A wiggle, a satisfying pop, and it's whole again. A piece in the wrong place just
             springs back.</p>
         </li>
         <li class="step reveal">
-          <!-- The dog completion film the app itself plays, straight from the
-               bundle (ClayPals/Resources/video/dog_completion.mp4), transcoded off
-               HEVC because Chrome and Firefox will not decode it. The word card
-               stays on top rather than being replaced by the film: the panel is
-               about the WORD, and card-over-film is exactly what a child sees. -->
+          <!-- The apple completion film the app itself plays, straight from the
+               bundle (claypals-produce ClayPals/Resources/video/apple_completion.mp4),
+               centre-cropped 1440x1080 -> 1350x1080 (5:4), transcoded off HEVC
+               because Chrome and Firefox will not decode it. Card over film is
+               exactly what a child sees. -->
           <div class="step-art step-art--word">
             <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
-                   poster="assets/img/word-dog-poster.webp"
-                   aria-label="The finished clay puppy trotting across his sunny backyard after his name is read out.">
-              <source src="assets/video/word-dog.webm" type="video/webm">
-              <source src="assets/video/word-dog.mp4" type="video/mp4">
+                   poster="../assets/img/word-apple-poster.webp"
+                   aria-label="The finished clay apple in its sunny orchard after its name is read out.">
+              <source src="../assets/video/word-apple.webm" type="video/webm">
+              <source src="../assets/video/word-apple.mp4" type="video/mp4">
             </video>
-            <div class="wordcard" aria-hidden="true"><span>D</span><span>O</span><span>G</span></div>
+            <div class="wordcard" aria-hidden="true"><span>Apple</span></div>
           </div>
           <div class="step-head"><span class="step-num" aria-hidden="true">3</span><h3>Then it says the word</h3></div>
-          <p>The finished pal says its own name out loud. The letters are named one at a time on
-            a little clay card, then the whole word again. A few seconds of print — never a quiz,
-            and a parent can switch it off in one tap.</p>
+          <p>The finished food says its own name out loud, then the letters are named one at a
+            time on a little word card. A few seconds of print — never a quiz, and a grown-up can
+            switch it off in the Parents' Corner.</p>
         </li>
       </ol>
       <script>
       /* prefers-reduced-motion, the download half. The media query above hides
-         the two panel videos, but `autoplay` has already told the browser to go
+         the panel video, but `autoplay` has already told the browser to go
          and fetch them — hiding an element does not cancel that. Removing the
          <source> children and calling load() aborts the selection before the
          response lands, so a visitor who has asked for less motion also pays
@@ -559,26 +544,26 @@ footer p{max-width:34rem}
         <li><b>No</b> accounts</li>
         <li><b>No</b> microphone</li>
         <li><b>No</b> data collected</li>
-        <li><b>No</b> links out of the app</li>
+        <li><b>No</b> ungated links</li>
         <li><b>No</b> way to lose</li>
       </ul>
 
       <div class="proofs">
         <div class="proof reveal">
           <h3>It respects your room</h3>
-          <p>Flip the hardware mute switch and ClayPals goes silent. Start a podcast and it plays
+          <p>Flip the hardware mute switch and the app goes silent. Start a podcast and it plays
             politely underneath instead of taking over your audio. The background music is quiet
             by default and switches off in one tap.</p>
         </div>
         <div class="proof reveal">
           <h3>The same four seconds, every time</h3>
-          <p>Every celebration is one continuous four-second clip — no cuts, no music sting, no
-            flashing. The same gentle moment for that animal, however many times it is finished.</p>
+          <p>Every celebration is one four-second clip. The same gentle moment for that food,
+            however many times it is finished.</p>
         </div>
         <div class="proof reveal">
           <h3>Nothing leaves the device</h3>
           <p>No analytics, no tracking, no accounts, no microphone and no speech recognition —
-            ClayPals never listens. It plays fully in airplane mode. Apple privacy label:
+            the app never listens. It plays fully in airplane mode. Apple privacy label:
             Data Not Collected.</p>
         </div>
       </div>
@@ -588,179 +573,218 @@ footer p{max-width:34rem}
     </div>
   </section>
 
-  <!-- ── The 23 ────────────────────────────────────────────────────────── -->
+  <!-- ── The 28 ────────────────────────────────────────────────────────── -->
   <section class="band">
     <div class="wrap">
       <div class="prose reveal">
         <p class="label">The roster</p>
-        <h2>Twenty-three pals, twenty-three little worlds.</h2>
-        <p class="lead">Farm, pond, savanna, ocean, night forest, coral reef. The dog, the duck
-          and the cow are free forever.</p>
+        <h2>Twenty-eight foods, twenty-eight little worlds.</h2>
+        <p class="lead">Orchard, garden bed, vineyard, cornfield, berry bush and more. Apple, banana,
+          carrot, tomato, orange, corn and grape are free forever.</p>
       </div>
       <ul class="shelf" id="shelf">
         <li style="--i:0">
           <div class="tile" style="background:rgb(140,198,232)">
             <span class="free">Free</span>
-            <img src="assets/img/animals/dog.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay dog.">
+            <img src="../assets/img/produce/apple.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay apple.">
           </div>
-          <span class="name">Dog</span>
+          <span class="name">Apple</span>
         </li>
         <li style="--i:1">
           <div class="tile" style="background:rgb(150,165,225)">
             <span class="free">Free</span>
-            <img src="assets/img/animals/duck.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay duck.">
+            <img src="../assets/img/produce/banana.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay banana.">
           </div>
-          <span class="name">Duck</span>
+          <span class="name">Banana</span>
         </li>
         <li style="--i:2">
-          <div class="tile" style="background:rgb(110,190,185)">
+          <div class="tile" style="background:rgb(140,198,232)">
             <span class="free">Free</span>
-            <img src="assets/img/animals/cow.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay cow.">
+            <img src="../assets/img/produce/carrot.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay carrot.">
           </div>
-          <span class="name">Cow</span>
+          <span class="name">Carrot</span>
         </li>
         <li style="--i:3">
-          <div class="tile" style="background:rgb(152,216,170)">
-            <img src="assets/img/animals/lion.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay lion.">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <span class="free">Free</span>
+            <img src="../assets/img/produce/tomato.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay tomato.">
           </div>
-          <span class="name">Lion</span>
+          <span class="name">Tomato</span>
         </li>
         <li style="--i:4">
-          <div class="tile" style="background:rgb(242,234,214)">
-            <img src="assets/img/animals/elephant.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay elephant.">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <span class="free">Free</span>
+            <img src="../assets/img/produce/orange.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay orange.">
           </div>
-          <span class="name">Elephant</span>
+          <span class="name">Orange</span>
         </li>
         <li style="--i:5">
-          <div class="tile" style="background:rgb(140,198,232)">
-            <img src="assets/img/animals/penguin.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay penguin.">
+          <div class="tile" style="background:rgb(186,166,220)">
+            <span class="free">Free</span>
+            <img src="../assets/img/produce/corn.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="Clay corn.">
           </div>
-          <span class="name">Penguin</span>
+          <span class="name">Corn</span>
         </li>
         <li style="--i:6">
-          <div class="tile" style="background:rgb(150,165,225)">
-            <img src="assets/img/animals/octopus.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay octopus.">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <span class="free">Free</span>
+            <img src="../assets/img/produce/grape.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="Clay grapes.">
           </div>
-          <span class="name">Octopus</span>
+          <span class="name">Grape</span>
         </li>
         <li style="--i:7">
-          <div class="tile" style="background:rgb(110,190,185)">
-            <img src="assets/img/animals/owl.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay owl.">
+          <div class="tile" style="background:rgb(186,166,220)">
+            <img src="../assets/img/produce/pear.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay pear.">
           </div>
-          <span class="name">Owl</span>
+          <span class="name">Pear</span>
         </li>
         <li style="--i:8">
-          <div class="tile" style="background:rgb(205,150,110)">
-            <img src="assets/img/animals/bunny.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay bunny.">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="../assets/img/produce/peach.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay peach.">
           </div>
-          <span class="name">Bunny</span>
+          <span class="name">Peach</span>
         </li>
         <li style="--i:9">
-          <div class="tile" style="background:rgb(152,216,170)">
-            <img src="assets/img/animals/bear.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay bear.">
+          <div class="tile" style="background:rgb(186,166,220)">
+            <img src="../assets/img/produce/lemon.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay lemon.">
           </div>
-          <span class="name">Bear</span>
+          <span class="name">Lemon</span>
         </li>
         <li style="--i:10">
-          <div class="tile" style="background:rgb(242,234,214)">
-            <img src="assets/img/animals/frog.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay frog.">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="../assets/img/produce/cherry.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay cherry.">
           </div>
-          <span class="name">Frog</span>
+          <span class="name">Cherry</span>
         </li>
         <li style="--i:11">
-          <div class="tile" style="background:rgb(246,216,120)">
-            <img src="assets/img/animals/turtle.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay turtle.">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="../assets/img/produce/mango.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay mango.">
           </div>
-          <span class="name">Turtle</span>
+          <span class="name">Mango</span>
         </li>
         <li style="--i:12">
-          <div class="tile" style="background:rgb(140,198,232)">
-            <img src="assets/img/animals/giraffe.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay giraffe.">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="../assets/img/produce/kiwi.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay kiwi.">
           </div>
-          <span class="name">Giraffe</span>
+          <span class="name">Kiwi</span>
         </li>
         <li style="--i:13">
-          <div class="tile" style="background:rgb(110,190,185)">
-            <img src="assets/img/animals/monkey.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay monkey.">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="../assets/img/produce/melon.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay melon.">
           </div>
-          <span class="name">Monkey</span>
+          <span class="name">Melon</span>
         </li>
         <li style="--i:14">
-          <div class="tile" style="background:rgb(248,190,150)">
-            <img src="assets/img/animals/whale.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay whale.">
+          <div class="tile" style="background:rgb(246,216,120)">
+            <img src="../assets/img/produce/plum.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay plum.">
           </div>
-          <span class="name">Whale</span>
+          <span class="name">Plum</span>
         </li>
         <li style="--i:15">
-          <div class="tile" style="background:rgb(152,216,170)">
-            <img src="assets/img/animals/butterfly.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay butterfly.">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="../assets/img/produce/potato.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay potato.">
           </div>
-          <span class="name">Butterfly</span>
+          <span class="name">Potato</span>
         </li>
         <li style="--i:16">
-          <div class="tile" style="background:rgb(150,165,225)">
-            <img src="assets/img/animals/sheep.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay sheep.">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <img src="../assets/img/produce/peas.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="Clay peas.">
           </div>
-          <span class="name">Sheep</span>
+          <span class="name">Peas</span>
         </li>
         <li style="--i:17">
-          <div class="tile" style="background:rgb(242,234,214)">
-            <img src="assets/img/animals/dino.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay dinosaur.">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <img src="../assets/img/produce/onion.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay onion.">
           </div>
-          <span class="name">Dinosaur</span>
+          <span class="name">Onion</span>
         </li>
         <li style="--i:18">
-          <div class="tile" style="background:rgb(140,198,232)">
-            <img src="assets/img/animals/crab.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay crab.">
+          <div class="tile" style="background:rgb(150,165,225)">
+            <img src="../assets/img/produce/pepper.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay pepper.">
           </div>
-          <span class="name">Crab</span>
+          <span class="name">Pepper</span>
         </li>
         <li style="--i:19">
-          <div class="tile" style="background:rgb(110,190,185)">
-            <img src="assets/img/animals/flamingo.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay flamingo.">
+          <div class="tile" style="background:rgb(186,166,220)">
+            <img src="../assets/img/produce/celery.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="Clay celery.">
           </div>
-          <span class="name">Flamingo</span>
+          <span class="name">Celery</span>
         </li>
         <li style="--i:20">
-          <div class="tile" style="background:rgb(152,216,170)">
-            <img src="assets/img/animals/snail.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay snail.">
+          <div class="tile" style="background:rgb(110,190,185)">
+            <img src="../assets/img/produce/strawberry.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay strawberry.">
           </div>
-          <span class="name">Snail</span>
+          <span class="name">Strawberry</span>
         </li>
         <li style="--i:21">
-          <div class="tile" style="background:rgb(150,165,225)">
-            <img src="assets/img/animals/kangaroo.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay kangaroo.">
+          <div class="tile" style="background:rgb(186,166,220)">
+            <img src="../assets/img/produce/watermelon.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay watermelon.">
           </div>
-          <span class="name">Kangaroo</span>
+          <span class="name">Watermelon</span>
         </li>
         <li style="--i:22">
-          <div class="tile" style="background:rgb(242,234,214)">
-            <img src="assets/img/animals/peacock.webp" width="400" height="400"
-                 loading="lazy" decoding="async" alt="A clay peacock.">
+          <div class="tile" style="background:rgb(248,190,150)">
+            <img src="../assets/img/produce/blueberry.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay blueberry.">
           </div>
-          <span class="name">Peacock</span>
+          <span class="name">Blueberry</span>
+        </li>
+        <li style="--i:23">
+          <div class="tile" style="background:rgb(186,166,220)">
+            <img src="../assets/img/produce/pineapple.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay pineapple.">
+          </div>
+          <span class="name">Pineapple</span>
+        </li>
+        <li style="--i:24">
+          <div class="tile" style="background:rgb(246,216,120)">
+            <img src="../assets/img/produce/broccoli.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="Clay broccoli.">
+          </div>
+          <span class="name">Broccoli</span>
+        </li>
+        <li style="--i:25">
+          <div class="tile" style="background:rgb(242,234,214)">
+            <img src="../assets/img/produce/cucumber.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay cucumber.">
+          </div>
+          <span class="name">Cucumber</span>
+        </li>
+        <li style="--i:26">
+          <div class="tile" style="background:rgb(140,198,232)">
+            <img src="../assets/img/produce/pumpkin.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay pumpkin.">
+          </div>
+          <span class="name">Pumpkin</span>
+        </li>
+        <li style="--i:27">
+          <div class="tile" style="background:rgb(152,216,170)">
+            <img src="../assets/img/produce/mushroom.webp" width="400" height="400"
+                 loading="lazy" decoding="async" alt="A clay mushroom.">
+          </div>
+          <span class="name">Mushroom</span>
         </li>
       </ul>
     </div>
@@ -777,20 +801,21 @@ footer p{max-width:34rem}
         <ul class="price-split">
           <li>
             <span class="amount">Free</span>
-            <h3>Dog, duck and cow</h3>
+            <h3>Apple, banana, carrot, tomato, orange, corn and grape</h3>
             <p>Yours forever. Two full puzzles each, the word moment, every sound — no time
               limit and no ads.</p>
           </li>
           <li>
             <span class="amount">$4.99 once</span>
-            <h3>The other twenty animals</h3>
+            <h3>The other twenty-one foods</h3>
             <p>One optional in-app purchase. Not a subscription, not coins, not a bundle —
               there is nothing else to buy, ever.</p>
           </li>
         </ul>
         <p class="fineprint">The purchase sits behind a parental gate a grown-up has to hold for
           three seconds, and Family Sharing and Ask&nbsp;to&nbsp;Buy work as you would expect.
-          ClayPals is free to download, and the three free pals stay free whether you buy or not.</p>
+          ClayPals: Fruits &amp; Veggies is free to download, and the seven free foods stay free whether
+          you buy or not.</p>
       </div>
     </div>
   </section>
@@ -798,8 +823,8 @@ footer p{max-width:34rem}
   <!-- ── Closing ───────────────────────────────────────────────────────── -->
   <section class="closing">
     <div class="wrap prose" style="margin-inline:auto">
-      <h2 class="reveal">Twenty-three pals are waiting.</h2>
-      <p class="reveal"><a class="btn" data-cta="closing" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
+      <h2 class="reveal">Twenty-eight foods are waiting.</h2>
+      <p class="reveal"><a class="btn" data-cta="closing" href="https://apps.apple.com/us/app/claypals-fruits-veggies/id6798962112">
         Download free on the App&nbsp;Store <span class="arrow" aria-hidden="true">→</span></a></p>
       <p class="btn-note reveal">Requires iOS&nbsp;17 or later. iPhone and iPad. Works completely
         offline — airplanes, waiting rooms, grandma's house.</p>
@@ -812,12 +837,13 @@ footer p{max-width:34rem}
     <p>ClayPals is made by a tiny independent studio. If something isn't right for your family,
       email us — a human reads and answers every message.</p>
     <ul class="footlinks">
-      <li><a data-cta="footer" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">ClayPals on the App&nbsp;Store</a></li>
+      <li><a data-cta="footer" href="https://apps.apple.com/us/app/claypals-fruits-veggies/id6798962112">ClayPals: Fruits &amp; Veggies on the App&nbsp;Store</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Use</a></li>
       <li><a href="mailto:support@claypals.app">support@claypals.app</a></li>
     </ul>
-    <p class="colophon">ClayPals: Toddler Puzzles · Kai Ventures.
-      Also from us: <a href="produce/">ClayPals: Fruits &amp; Veggies</a> (<a href="produce/privacy.html">privacy policy</a> · <a href="produce/terms.html">terms of use</a>).</p>
+    <p class="colophon">ClayPals: Fruits &amp; Veggies · Kai Ventures.
+      Also from us: <a href="../">ClayPals: Toddler Puzzles</a>, twenty-three clay animals.</p>
   </div>
 </footer>
 
@@ -870,11 +896,11 @@ footer p{max-width:34rem}
 {
   "@context":"https://schema.org",
   "@type":"MobileApplication",
-  "name":"ClayPals: Toddler Puzzles",
+  "name":"ClayPals: Fruits & Veggies",
   "operatingSystem":"iOS 17.0 or later",
   "applicationCategory":"EducationalApplication",
-  "url":"https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298",
-  "description":"A claymation puzzle toy for 2–4 year olds. Fit the clay animal into its scene, then rebuild it from big pieces. 23 animals, no ads, no data collected.",
+  "url":"https://apps.apple.com/us/app/claypals-fruits-veggies/id6798962112",
+  "description":"A claymation puzzle toy for 2–4 year olds. Slide the clay food into the place it grows, then rebuild it from big pieces. 28 fruits and vegetables, no ads, no data collected.",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
 }
 </script>

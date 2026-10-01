@@ -16,11 +16,13 @@
 // CONFIRMED by the owner: promo is valid THROUGH 9 Oct; standard pricing from
 // 10 Oct. Set to 10 Oct 00:00 UTC. Do not change these numbers — if the App
 // Store shows something different, ask rather than editing.
+// 2026-10-01: the owner corrected the ClayPals standard price to 4.99 (the
+// marketing brief said 3.99). Promo stays 1.99, which the App Store shows.
 var PROMO_ENDS = Date.UTC(2026, 9, 10, 0, 0, 0);   // month is 0-indexed: 9 = October
 
 var PRICING = {
-  '6794948298': { name: 'ClayPals: Toddler Puzzles',  promo: 1.99,  standard: 3.99  },
-  '6798962112': { name: 'ClayPals: Fruits & Veggies', promo: 1.99,  standard: 3.99  },
+  '6794948298': { name: 'ClayPals: Toddler Puzzles',  promo: 1.99,  standard: 4.99  },
+  '6798962112': { name: 'ClayPals: Fruits & Veggies', promo: 1.99,  standard: 4.99  },
   '6761357439': { name: 'Standby Booth',              promo: 14.99, standard: 29.99 }
 };
 

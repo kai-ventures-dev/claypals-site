@@ -1,33 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVS5B771EK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KVS5B771EK');
-</script>
-
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1693906458397139');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1693906458397139&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<!-- Consent layer: Consent Mode v2 defaults, the EEA/UK cookie banner, and the
+     consent-gated loaders for GA4 and the Meta Pixel (same IDs as before).
+     Synchronous on purpose: it must run before anything can set a cookie. -->
+<script src="../assets/js/consent.js"></script>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -347,6 +324,10 @@ footer{
 footer p{max-width:34rem}
 .footlinks{display:flex;flex-wrap:wrap;gap:.5em 1.5em;margin:1.6em 0 1.6em;padding:0;list-style:none}
 .footlinks a{font-weight:600}
+/* "Privacy choices" reopens the cookie banner; it is a button, styled as one of the links. */
+.linkbtn{font:inherit;font-weight:600;color:var(--terra-press);background:none;border:0;padding:0;cursor:pointer;
+  text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:.08em}
+.linkbtn:hover{color:var(--terra)}
 .colophon{font-size:.84rem;color:var(--ink-soft)}
 
 /* ── Motion ────────────────────────────────────────────────────────────── */
@@ -841,6 +822,7 @@ footer p{max-width:34rem}
       <li><a href="privacy.html">Privacy Policy</a></li>
       <li><a href="terms.html">Terms of Use</a></li>
       <li><a href="mailto:support@claypals.app">support@claypals.app</a></li>
+      <li><button type="button" class="linkbtn" onclick="window.cpConsent &amp;&amp; window.cpConsent.reset()">Privacy choices</button></li>
     </ul>
     <p class="colophon">ClayPals: Fruits &amp; Veggies · Kai Ventures.
       Also from us: <a href="../">ClayPals: Toddler Puzzles</a>, twenty-three clay animals.</p>

@@ -92,24 +92,37 @@
 
   /* -----------------------------------------------------------------
      3. Geo heuristic — client-side only (GitHub Pages has no server).
-     Timezone: any Europe/* zone, plus the five EEA Atlantic zones.
+     Timezone: any Europe/* zone, plus the EEA/EU zones that are NOT under
+     Europe/ in the tz database: Cyprus (Asia/*), the Atlantic islands,
+     Ceuta (Africa/*) and the EU outermost regions in the Americas and the
+     Indian Ocean (zone.tab, checked 2026-10-01). Standby Booth's copy of this
+     list has only the five Atlantic zones.
      Language: BCP 47 REGION subtags only ("en-GB" → GB); a bare
      primary subtag ("de") is a language, not a region — never matched.
      Any exception → true (fail closed: when unsure, ask).
      ----------------------------------------------------------------- */
-  var EEA_ATLANTIC_TZ = {
-    'Atlantic/Reykjavik': 1,
-    'Atlantic/Canary': 1,
-    'Atlantic/Faroe': 1,
-    'Atlantic/Madeira': 1,
-    'Atlantic/Azores': 1
+  var EEA_OTHER_TZ = {
+    'Atlantic/Reykjavik': 1,   /* Iceland */
+    'Atlantic/Canary': 1,      /* Spain */
+    'Atlantic/Faroe': 1,       /* Denmark */
+    'Atlantic/Madeira': 1,     /* Portugal */
+    'Atlantic/Azores': 1,      /* Portugal */
+    'Asia/Nicosia': 1,         /* Cyprus */
+    'Asia/Famagusta': 1,       /* Cyprus */
+    'Africa/Ceuta': 1,         /* Spain: Ceuta, Melilla */
+    'America/Cayenne': 1,      /* France: French Guiana */
+    'America/Guadeloupe': 1,   /* France */
+    'America/Marigot': 1,      /* France: Saint-Martin */
+    'America/Martinique': 1,   /* France */
+    'Indian/Reunion': 1,       /* France */
+    'Indian/Mayotte': 1        /* France */
   };
 
   function isEEAUK() {
     try {
       var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       var tzMatch = tz.indexOf('Europe/') === 0 ||
-        Object.prototype.hasOwnProperty.call(EEA_ATLANTIC_TZ, tz);
+        Object.prototype.hasOwnProperty.call(EEA_OTHER_TZ, tz);
 
       var langMatch = false;
       var langs = navigator.languages ||
@@ -202,9 +215,19 @@
     '@media (max-width:640px){.cp-consent-inner{flex-direction:column;align-items:stretch;gap:10px;padding:12px 0;}.cp-consent-hd{display:none;}.cp-consent-body{font-size:.84rem;line-height:1.45;}.cp-consent-actions .cp-consent-btn{flex:1;}}'
   ].join('\n');
 
+  /* While the banner is up, pad the page by its height, so scrolling to the
+     end still reaches the footer (its links and "Privacy choices") instead of
+     leaving them underneath the banner. */
+  function reserveSpace() {
+    var el = document.getElementById(BANNER_ID);
+    document.body.style.paddingBottom = el ? el.offsetHeight + 'px' : '';
+  }
+
   function removeBanner() {
     var el = document.getElementById(BANNER_ID);
     if (el && el.parentNode) el.parentNode.removeChild(el);
+    window.removeEventListener('resize', reserveSpace);
+    reserveSpace();
   }
 
   /* The policy that describes THIS page's website analytics. */
@@ -242,8 +265,12 @@
 
     var body = document.createElement('p');
     body.className = 'cp-consent-body';
-    body.appendChild(document.createTextNode(
-      "We'd like to count visits and measure our ads. Nothing loads unless you accept, and none of it is in the apps. More in the "
+    /* Reopened from "Privacy choices" after the trackers already loaded on this
+       page: "nothing loads unless you accept" would be untrue, so say what is
+       running and what Decline does instead. */
+    body.appendChild(document.createTextNode(loaded
+      ? "This website uses Google Analytics and the Meta Pixel to count visits and measure our ads. Decline turns them off and clears their cookies. More in the "
+      : "We'd like to use Google Analytics and the Meta Pixel to count visits and measure our ads. Nothing loads unless you accept, and none of it is in the apps. More in the "
     ));
     var link = document.createElement('a');
     link.href = policyHref();
@@ -274,6 +301,8 @@
     inner.appendChild(actions);
     banner.appendChild(inner);
     document.body.appendChild(banner);
+    reserveSpace();
+    window.addEventListener('resize', reserveSpace);
   }
 
   function showBannerWhenReady() {
@@ -343,6 +372,11 @@
       if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
       clearTrackingCookies();
       removeBanner();
+      /* If GA and the pixel already loaded on this page, a consent update stops
+         their cookies but leaves the scripts running for the rest of the page
+         view. A reload starts the page again with the stored denial: nothing
+         loads at all. */
+      if (loaded) window.location.reload();
     },
     reset: function () {
       clearChoice();

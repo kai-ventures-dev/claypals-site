@@ -863,34 +863,7 @@ footer p{max-width:34rem}
 })();
 </script>
 
-<script>
-/* Outbound App Store clicks -> Meta ViewContent + GA4 app_store_click.
-   Delegated so every link to apps.apple.com is covered, including any added
-   later. Both tags are optional at runtime: if an ad blocker stopped gtag.js
-   or fbevents.js from loading, the guards below keep the click working
-   normally instead of throwing on a missing global. */
-(function () {
-  document.addEventListener('click', function (ev) {
-    var a = ev.target.closest && ev.target.closest('a[href*="apps.apple.com"]');
-    if (!a) return;
-    var where = a.getAttribute('data-cta') || 'other';
-
-    if (typeof fbq === 'function') {
-      fbq('track', 'ViewContent');
-    }
-    if (typeof gtag === 'function') {
-      /* transport_type 'beacon' matters here: these links navigate in the same
-         tab, so a plain request can be cancelled as the page unloads. A beacon
-         is handed to the browser to deliver after we are gone. */
-      gtag('event', 'app_store_click', {
-        'event_category': 'outbound',
-        'event_label': where,
-        'transport_type': 'beacon'
-      });
-    }
-  }, true);
-})();
-</script>
+<script src="../assets/js/meta-viewcontent.js"></script>
 
 <script type="application/ld+json">
 {

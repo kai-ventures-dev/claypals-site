@@ -28,7 +28,9 @@
   var EEA_UK = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR',
                 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL',
                 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO',
-                'GB'];
+                'GB',
+                /* EU outermost regions that carry their own ISO 3166 codes. */
+                'GF', 'GP', 'MQ', 'RE', 'YT', 'MF'];
 
   /* -----------------------------------------------------------------
      1. Consent Mode v2 stub — FIRST, so defaults precede everything.
@@ -84,10 +86,6 @@
         ts: new Date().toISOString()
       }));
     } catch (e) { /* storage blocked — session-only choice */ }
-  }
-
-  function clearChoice() {
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   }
 
   /* -----------------------------------------------------------------
@@ -209,9 +207,10 @@
     '.cp-consent-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 1.4em;font-family:"Baloo 2",ui-rounded,system-ui,sans-serif;font-size:1rem;font-weight:800;line-height:1;color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:999px;cursor:pointer;transition:background-color .16s ease,color .16s ease;}',
     '.cp-consent-btn:hover{background:var(--ink);color:var(--surface);}',
     '.cp-consent-btn:focus-visible{outline:3px solid var(--terra);outline-offset:3px;}',
-    /* Narrow screens: stack, and drop the heading (the body says the same thing),
-       so the banner stays short enough to leave the hero's Download button
-       uncovered on a 375x667 iPhone SE. */
+    /* Narrow screens: stack, and drop the heading (the body says the same thing)
+       to keep the banner short. On a 375x667 iPhone SE it still covers the bottom
+       few pixels of the /produce/ hero button until a choice is made: naming both
+       services in the copy was judged worth that line. */
     '@media (max-width:640px){.cp-consent-inner{flex-direction:column;align-items:stretch;gap:10px;padding:12px 0;}.cp-consent-hd{display:none;}.cp-consent-body{font-size:.84rem;line-height:1.45;}.cp-consent-actions .cp-consent-btn{flex:1;}}'
   ].join('\n');
 
@@ -269,8 +268,8 @@
        page: "nothing loads unless you accept" would be untrue, so say what is
        running and what Decline does instead. */
     body.appendChild(document.createTextNode(loaded
-      ? "This website uses Google Analytics and the Meta Pixel to count visits and measure our ads. Decline turns them off and clears their cookies. More in the "
-      : "We'd like to use Google Analytics and the Meta Pixel to count visits and measure our ads. Nothing loads unless you accept, and none of it is in the apps. More in the "
+      ? "This website uses Google Analytics and the Meta Pixel to count visits, and to measure and target our ads. Decline turns them off and clears their cookies on this site. More in the "
+      : "We'd like to use Google Analytics and the Meta Pixel to count visits, and to measure and target our ads. Nothing loads unless you accept, and none of it is in the apps. More in the "
     ));
     var link = document.createElement('a');
     link.href = policyHref();
@@ -286,13 +285,13 @@
     accept.type = 'button';
     accept.className = 'cp-consent-btn';
     accept.textContent = 'Accept';
-    accept.addEventListener('click', function () { api.grant(); });
+    accept.setAttribute('data-cp-consent', 'grant');
 
     var decline = document.createElement('button');
     decline.type = 'button';
     decline.className = 'cp-consent-btn';
     decline.textContent = 'Decline';
-    decline.addEventListener('click', function () { api.deny(); });
+    decline.setAttribute('data-cp-consent', 'deny');
 
     actions.appendChild(accept);
     actions.appendChild(decline);
@@ -376,10 +375,15 @@
          their cookies but leaves the scripts running for the rest of the page
          view. A reload starts the page again with the stored denial: nothing
          loads at all. */
-      if (loaded) window.location.reload();
+      /* Only when the denial actually stored: with storage blocked, a reload
+         would come back with no choice and, outside the EEA/UK, load them again. */
+      var stored = readChoice();
+      if (loaded && stored && stored.status === 'denied') window.location.reload();
     },
     reset: function () {
-      clearChoice();
+      /* Reopen the banner WITHOUT clearing the stored choice: a visitor who
+         opens it and leaves without clicking keeps whatever they chose before.
+         Accept or Decline overwrite the record. */
       showBannerWhenReady(); /* any geo — footer "Privacy choices" */
     },
     status: function () {
@@ -388,6 +392,23 @@
     }
   };
   window.cpConsent = api;
+
+  /* Consent controls (the banner's Accept / Decline, and every
+     [data-cp-consent="reset"] "Privacy choices" button) are handled HERE, on
+     window in the capture phase, and the click goes no further. Registered
+     before loadAll() can run, so it fires before any listener the Meta pixel
+     adds: measured on claypals.app 2026-10-01, the pixel's automatic
+     SubscribedButtonClick reported a click on "Decline" to Meta before a
+     button-level handler could revoke consent. */
+  window.addEventListener('click', function (ev) {
+    var el = ev.target && ev.target.closest && ev.target.closest('[data-cp-consent]');
+    if (!el) return;
+    var action = el.getAttribute('data-cp-consent');
+    if (action !== 'grant' && action !== 'deny' && action !== 'reset') return;
+    ev.stopPropagation();
+    ev.preventDefault();
+    api[action]();
+  }, true);
 
   /* -----------------------------------------------------------------
      8. Decision matrix (stored choice always beats geo):

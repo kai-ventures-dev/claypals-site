@@ -24,7 +24,7 @@ async function session(b, geo, opts = {}) {
   }
   const page = await ctx.newPage();
   const cdp = await ctx.newCDPSession(page); await cdp.send('Network.enable');
-  await cdp.send('Network.setBlockedURLs', { urls: ['*googletagmanager*', '*google-analytics*', '*facebook.com/tr*', '*facebook.com/privacy_sandbox*', '*on.aws*', '*run.app*', '*apps.apple.com*'] });
+  await cdp.send('Network.setBlockedURLs', { urls: ['*googletagmanager*', '*google-analytics*', '*facebook.com/tr*', '*facebook.com/privacy_sandbox*', '*on.aws*', '*run.app*', '*apps.apple.com*', '*posthog.com*'] });
   const net = { gtag: 0, fbevents: 0, events: [] };
   cdp.on('Network.requestWillBeSent', e => {
     const u = e.request.url;
@@ -59,7 +59,7 @@ const loadedNone = n => n.gtag === 0 && n.fbevents === 0 && n.events.length === 
     s = await session(b, EU); await s.go(path);
     ok(await s.banner(), 'banner shown');
     const txt = await s.page.locator('#cp-consent-banner').innerText().catch(() => '');
-    ok(/Google Analytics and the Meta Pixel/.test(txt) && /measure and target our ads/.test(txt) && /Nothing loads unless you accept/.test(txt), 'banner names both services, says ads are targeted, says nothing loads');
+    ok(/Google Analytics, PostHog and the Meta Pixel/.test(txt) && /measure and target our ads/.test(txt) && /Nothing loads unless you accept/.test(txt), 'banner names the three services, says ads are targeted, says nothing loads');
     ok(loadedNone(s.net), `NOTHING loads (gtag=${s.net.gtag} fbevents=${s.net.fbevents} events=${s.net.events.length})`);
     ok((await s.trackerCookies()).length === 0, 'no _ga/_fbp/_fbc cookies');
     const href = await s.page.locator('#cp-consent-banner a').getAttribute('href');

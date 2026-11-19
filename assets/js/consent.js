@@ -4,8 +4,8 @@
    page. Loaded in <head>, before anything that could set a cookie.
 
    Ported from standbybooth.com's assets/consent.js so the two sites behave
-   the same way; differences are ClayPals' own tag IDs, no PostHog (this
-   site never had it), no hand-written _fbc cookie (Meta's pixel already
+   the same way; differences are ClayPals' own tag IDs and PostHog
+   project (added 2026-11-05), no hand-written _fbc cookie (Meta's pixel already
    sets _fbc from ?fbclid= itself — measured 2026-10-01), and the banner is
    drawn with this site's tokens and voice.
 
@@ -20,6 +20,9 @@
 
    Trackers NEVER load on the privacy or terms pages — any geo, any choice.
    (Those pages do not include this file at all; the guard is a backstop.)
+   PostHog is held to a stricter rule than GA4 and the pixel: only on the two
+   landing pages, and only after the visitor pressed Accept — in every
+   region. The geo default that loads GA4 and the pixel never loads it.
    Public API: window.cpConsent = { grant, deny, reset, status }.
    ===================================================================== */
 (function () {
@@ -57,7 +60,9 @@
   });
 
   /* -----------------------------------------------------------------
-     2. Stored choice — {v:1, status:'granted'|'denied', ts:ISO}.
+     2. Stored choice — {v:1, status:'granted'|'denied', ts:ISO, ph:1}.
+     ph:1 marks a choice made on a banner that named PostHog; a 'granted'
+     record without it predates PostHog and does not load it.
      Corrupt, unknown-shape, or >365-day-old records read as "no choice".
      ----------------------------------------------------------------- */
   var STORAGE_KEY = 'cp-consent';
@@ -83,7 +88,8 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         v: 1,
         status: status,
-        ts: new Date().toISOString()
+        ts: new Date().toISOString(),
+        ph: 1
       }));
     } catch (e) { /* storage blocked — session-only choice */ }
   }
@@ -180,12 +186,53 @@
     window.fbq('track', 'PageView');
   }
 
-  function loadAll() {
-    if (loaded) return;
+  /* PostHog (project "ClayPals website") — snippet verbatim from
+     standbybooth.com; anonymous pageview-only config:
+     person_profiles "identified_only" (and we never call identify()),
+     respect_dnt honors Do Not Track, disable_session_recording stops
+     any DOM/keystroke capture, and autocapture is off so clicks are not
+     recorded (the privacy policy promises visit counts only). The seven
+     options after it pin off features the PostHog project could otherwise
+     switch on remotely. The project itself also has replay off and
+     discards visitor IP addresses. Website only: never the apps. */
+  function loadPostHog() {
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_session_recording opt_out_session_recording has_opted_in_session_recording has_opted_out_session_recording".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    window.posthog.init('phc_ktiY2pjjaRG6iZwJHgYfHLH36dk52Y56CcrtmAxoqKb6', {
+        api_host: 'https://us.i.posthog.com',
+        person_profiles: 'identified_only',
+        respect_dnt: true,
+        disable_session_recording: true,
+        autocapture: false,
+        capture_heatmaps: false,
+        capture_dead_clicks: false,
+        capture_performance: false,
+        capture_exceptions: false,
+        disable_surveys: true,
+        disable_product_tours: true,
+        disable_conversations: true
+    });
+  }
+
+  var posthogLoaded = false;
+
+  function isLandingPage() {
+    var p = (window.location && window.location.pathname) || '';
+    return /^\/(produce\/)?(index\.html)?$/.test(p);
+  }
+
+  /* accepted: true only when the visitor pressed Accept on a banner that named
+     PostHog (now, or on an earlier visit). */
+  function loadAll(accepted) {
     if (isLegalPage()) return; /* zero trackers on legal pages, all geos */
-    loaded = true;
-    loadGA4();
-    loadMetaPixel();
+    if (!loaded) {
+      loaded = true;
+      loadGA4();
+      loadMetaPixel();
+    }
+    if (accepted && !posthogLoaded && isLandingPage()) {
+      posthogLoaded = true;
+      loadPostHog();
+    }
   }
 
   /* -----------------------------------------------------------------
@@ -267,9 +314,13 @@
     /* Reopened from "Privacy choices" after the trackers already loaded on this
        page: "nothing loads unless you accept" would be untrue, so say what is
        running and what Decline does instead. */
-    body.appendChild(document.createTextNode(loaded
-      ? "This website uses Google Analytics and the Meta Pixel to count visits, and to measure and target our ads. Decline turns them off and clears their cookies on this site. More in the "
-      : "We'd like to use Google Analytics and the Meta Pixel to count visits, and to measure and target our ads. Nothing loads unless you accept, and none of it is in the apps. More in the "
+    /* And when GA and the pixel loaded without PostHog (the geo default, or an
+       Accept from before PostHog), say that Accept is what turns PostHog on. */
+    body.appendChild(document.createTextNode(posthogLoaded
+      ? "This website uses Google Analytics, PostHog and the Meta Pixel to count visits, and to measure and target our ads. Decline turns them off and clears their cookies on this site. More in the "
+      : loaded
+      ? "This website uses Google Analytics and the Meta Pixel to count visits, and to measure and target our ads. Accept also turns on PostHog, which only counts visits. Decline turns them off and clears their cookies on this site. More in the "
+      : "We'd like to use Google Analytics, PostHog and the Meta Pixel to count visits, and to measure and target our ads. Nothing loads unless you accept, and none of it is in the apps. More in the "
     ));
     var link = document.createElement('a');
     link.href = policyHref();
@@ -313,8 +364,9 @@
   }
 
   /* -----------------------------------------------------------------
-     6. Best-effort cleanup on deny — expire _ga* / _fbp / _fbc cookies
-     across domain + path variants.
+     6. Best-effort cleanup on deny — expire _ga* / _fbp / _fbc / ph_*
+     cookies across domain + path variants, and drop PostHog's ph_*
+     localStorage keys.
      ----------------------------------------------------------------- */
   function expireCookie(name, domain) {
     var base = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; max-age=0; path=/';
@@ -334,9 +386,29 @@
       for (var i = 0; i < cookies.length; i++) {
         var name = cookies[i].split('=')[0].replace(/^\s+|\s+$/g, '');
         if (name.indexOf('_ga') === 0 || name.indexOf('_fbp') === 0 ||
-            name.indexOf('_fbc') === 0) {
+            name.indexOf('_fbc') === 0 || name.indexOf('ph_') === 0) {
           for (var d = 0; d < domains.length; d++) expireCookie(name, domains[d]);
         }
+      }
+    } catch (e) {}
+  }
+
+  /* Both stores: PostHog keeps its window id in sessionStorage.
+     Decline passes /^ph_/ and so KEEPS the __ph_opt_in_out_ marker that
+     opt_out_capturing() writes: PostHog re-reads it from storage on every
+     capture, and without it the reload that follows Decline would send a
+     $pageleave. Accept passes /^__ph_/ to drop that marker, or PostHog would
+     stay silent after a Decline followed by an Accept. */
+  function clearPostHogStorage(prefix) {
+    try {
+      var stores = [localStorage, sessionStorage];
+      for (var s = 0; s < stores.length; s++) {
+        var doomed = [];
+        for (var i = 0; i < stores[s].length; i++) {
+          var key = stores[s].key(i);
+          if (key && prefix.test(key)) doomed.push(key);
+        }
+        for (var j = 0; j < doomed.length; j++) stores[s].removeItem(doomed[j]);
       }
     } catch (e) {}
   }
@@ -354,7 +426,8 @@
         ad_user_data: 'granted',
         ad_personalization: 'granted'
       });
-      loadAll();
+      clearPostHogStorage(/^__ph_/);
+      loadAll(true);
       removeBanner();
     },
     deny: function () {
@@ -369,9 +442,15 @@
       /* And Meta: a pixel that already loaded keeps running for the rest of
          this page view unless told to stop. */
       if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
+      /* And PostHog: stop capturing for the rest of this page view. */
+      /* try: a throw here must not skip the cookie cleanup and reload below. */
+      try {
+        if (window.posthog && typeof window.posthog.opt_out_capturing === 'function') window.posthog.opt_out_capturing();
+      } catch (e) {}
       clearTrackingCookies();
+      clearPostHogStorage(/^ph_/);
       removeBanner();
-      /* If GA and the pixel already loaded on this page, a consent update stops
+      /* If GA, PostHog and the pixel already loaded on this page, a consent update stops
          their cookies but leaves the scripts running for the rest of the page
          view. A reload starts the page again with the stored denial: nothing
          loads at all. */
@@ -413,8 +492,10 @@
   /* -----------------------------------------------------------------
      8. Decision matrix (stored choice always beats geo):
         — stored denied            → nothing loads, no banner
-        — stored granted           → consent update + loadAll()
-        — no choice, not EEA/UK    → loadAll() immediately, no banner
+        — stored granted           → consent update + loadAll(), with PostHog
+                                     only if that Accept named it (ph:1)
+        — no choice, not EEA/UK    → GA4 + pixel immediately, no banner,
+                                     never PostHog
         — no choice, EEA/UK        → load NOTHING, banner on ready
      ----------------------------------------------------------------- */
   var choice = readChoice();
@@ -427,11 +508,11 @@
       ad_user_data: 'granted',
       ad_personalization: 'granted'
     });
-    loadAll();
+    loadAll(choice.ph === 1);
   } else if (isEEAUK()) {
     showBannerWhenReady();
   } else {
-    loadAll();
+    loadAll(false);
   }
 
 })();

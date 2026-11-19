@@ -1,0 +1,37 @@
+/* AEO additions for claypals.app (2026-10-31). Linked after each page's inline <style>;
+   uses only that style's tokens, so dark mode and the page fonts carry over.
+   Covers: the FAQ, the footer's follow links and the footer link contrast. */
+
+/* Fixed in both themes: ink on the yellow star, and the light theme's footer link. */
+:root{--on-star:#4a3527;--foot-link:#9c4329}
+
+/* ── FAQ ───────────────────────────────────────────────────────────────── */
+.faq{background:var(--bg-sunk)}
+.prose-wide{max-width:min(46rem,100% - var(--gutter)*2)}
+.faq h2{margin-bottom:.8em}
+.faq details{
+  background:var(--surface);border:1px solid var(--rim);border-radius:18px;
+  margin:0 0 .75rem;box-shadow:0 2px 0 var(--cast-soft);
+}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1em 1.2em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";content:"+" / "";flex:none;width:1.6rem;height:1.6rem;display:grid;place-items:center;border-radius:50%;
+  background:var(--star);color:var(--on-star);font:800 1.05rem/1 "Baloo 2",ui-rounded,system-ui,sans-serif;
+  transition:transform .2s ease;
+}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary h3{margin:0;font-size:1.06rem}
+.faq details p{padding:0 1.2em 1.15em;margin:0;font-size:1rem}
+
+/* ── Footer follow links ───────────────────────────────────────────────── */
+.follow{display:flex;flex-wrap:wrap;gap:.5em 1.5em;margin:-.6em 0 1.6em;padding:0;list-style:none}
+.follow a{font-weight:600}
+
+/* Footer links on the light theme: #b85539 on the sunk background is 3.7:1; this is 4.5:1 or better. */
+/* :where() keeps the theme test out of the specificity, so a:hover and .linkbtn:hover still win. */
+:where(:root:not([data-theme="dark"])) footer a,
+:where(:root:not([data-theme="dark"])) footer .linkbtn{color:var(--foot-link)}

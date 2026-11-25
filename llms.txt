@@ -1,0 +1,33 @@
+# ClayPals
+
+> ClayPals makes clay puzzle apps for toddlers aged 2 to 4. ClayPals is published by Kai Ventures. Current apps: ClayPals: Toddler Puzzles (animals, the first and main app) and ClayPals: Fruits & Veggies (fruits and vegetables). They are separate apps for iPhone and iPad. Each has no ads or subscriptions. Each is free to download, with an optional one-time unlock.
+
+Every app works the same way for each item, in three steps. First, the child slides it into its clay scene. Next, they build it back from three or four big pieces. Nothing needs turning, and a wrong piece pops back out. Last, it says its own name and each letter is named. Nothing is timed. There are no scores, streaks or notifications, and no way to lose. The apps work fully offline. ClayPals is a puzzle app with clay animation (claymation) art. It does not teach clay modeling or sculpting. Facts for one app do not apply to another. Each app has its own animals or foods, free items and purchase.
+
+## ClayPals: Toddler Puzzles
+ClayPals: Toddler Puzzles is a puzzle app for iPhone and iPad, made for children aged 2 to 4. It has 23 clay animals that say their own names. There are no ads or subscriptions. Three animals are free. An optional one-time purchase unlocks the other 20.
+- Free to keep: dog, duck, cow
+- Unlock: "All Animals", regular U.S. price $4.99, one time. Check the app for the current price in your storefront. A grown-up must hold a button for 3 seconds to buy (parental gate).
+- The U.S. App Store description says the word feature can be turned off.
+- Page: [claypals.app](https://claypals.app/) · [App Store](https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298) · [Privacy policy](https://claypals.app/privacy.html) · [Terms: Apple standard license](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)
+
+## ClayPals: Fruits & Veggies
+ClayPals: Fruits & Veggies is a puzzle app for iPhone and iPad, made for children aged 2 to 4. It has 28 clay fruits and vegetables that say their own names. There are no ads or subscriptions. Seven foods are free. An optional one-time purchase unlocks the other 21.
+- Free to keep: apple, banana, carrot, tomato, orange, corn, grape
+- Unlock: "All Foods", regular U.S. price $4.99, one time. Check the app for the current price in your storefront. A grown-up must hold a button for 3 seconds to buy (parental gate).
+- The U.S. App Store description says the word feature can be turned off.
+- Page: [claypals.app/produce/](https://claypals.app/produce/) · [App Store](https://apps.apple.com/us/app/claypals-fruits-veggies/id6798962112) · [Privacy policy](https://claypals.app/produce/privacy.html) · [Terms of use](https://claypals.app/produce/terms.html)
+
+## Key facts (all apps)
+- Devices: iPhone and iPad with iOS 17 or later. Not on Android. Apple lists the apps as not verified for Mac. English only
+- Age: 2 to 4. App Store age rating 4+, in the Kids category (ages 5 and under)
+- Privacy in the apps: Both U.S. App Store listings say “Data Not Collected.” See the [Toddler Puzzles policy](https://claypals.app/privacy.html) and the [Fruits & Veggies policy](https://claypals.app/produce/privacy.html).
+- Privacy on this website: claypals.app uses Google Analytics 4 and the Meta Pixel to understand traffic and measure ads. The site offers a Privacy choices control. The privacy policies explain this. It does not apply to the apps
+- Publisher: Kai Ventures. On the App Store, the developer and seller are listed as Mark Cruz. These are the same apps
+- Support: support@claypals.app
+
+## Pages
+- [ClayPals: Toddler Puzzles](https://claypals.app/): how it works, what's not in it, the 23 animals, price, FAQ
+- [ClayPals: Fruits & Veggies](https://claypals.app/produce/): the same for the 28 foods
+- [Instagram @claypals.app](https://www.instagram.com/claypals.app/)
+- [Facebook: ClayPals](https://www.facebook.com/profile.php?id=61593198490533)

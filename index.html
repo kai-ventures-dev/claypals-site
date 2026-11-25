@@ -9,22 +9,22 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ClayPals: Toddler Puzzles — a claymation puzzle toy for ages 2–4</title>
-<meta name="description" content="Fit the clay puppy into his yard, then build him back from big pieces. 23 clay animals for 2–4 year olds. Free on the App Store — no ads, no scores, nothing collected.">
+<title>ClayPals: Toddler Puzzles | Clay puzzle app for ages 2 to 4</title>
+<meta name="description" content="ClayPals: Toddler Puzzles for iPhone and iPad, ages 2 to 4. 23 clay animals. Free to download, with an optional one-time unlock. No ads.">
 <link rel="canonical" href="https://claypals.app/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ClayPals">
-<meta property="og:title" content="ClayPals — a claymation puzzle toy for 2–4 year olds">
-<meta property="og:description" content="Clay animals, and the words that name them. 23 claymation puzzles, free on the App Store. No ads, no scores, nothing collected.">
+<meta property="og:title" content="ClayPals: Toddler Puzzles, a clay puzzle app for ages 2 to 4">
+<meta property="og:description" content="Clay animals that say their own names. 23 animals, free to download. No ads or subscriptions.">
 <meta property="og:url" content="https://claypals.app/">
 <meta property="og:image" content="https://claypals.app/assets/img/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="A yellow clay puppy sitting in a green clay backyard, beside the word ClayPals.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ClayPals — a claymation puzzle toy for 2–4 year olds">
-<meta name="twitter:description" content="Clay animals, and the words that name them. Free on the App Store.">
+<meta name="twitter:title" content="ClayPals: Toddler Puzzles, a clay puzzle app for ages 2 to 4">
+<meta name="twitter:description" content="Clay animals that say their own names. 23 animals, free to download. No ads or subscriptions.">
 <meta name="twitter:image" content="https://claypals.app/assets/img/og-cover.jpg">
 
 <!-- Light is the default everywhere, regardless of the visitor's OS setting: the
@@ -50,23 +50,22 @@
 
 /* ── Tokens ────────────────────────────────────────────────────────────── */
 :root{
-  /* Every value below is lifted from the app: ClayPalette.swift, StorePalette
-     (ParentalGate.swift) and the tileColor entries in puzzles.json. */
-  --bg:#f9efde;            /* ClayPalette.cream */
-  --bg-sunk:#f2e1c8;       /* ClayPalette.warmSand */
+
+  --bg:#f9efde;
+  --bg-sunk:#f2e1c8;
   --surface:#fefaf2;
-  --rim:#e3c9a8;           /* StorePalette.tileRim */
+  --rim:#e3c9a8;
   --ink:#4a3527;
-  --ink-body:#6b4f3b;      /* StorePalette.text */
+  --ink-body:#6b4f3b;
   --ink-soft:#7a6049;
-  --terra:#e07a5e;         /* StorePalette.buy */
+  --terra:#e07a5e;
   --terra-press:#b85539;
   --btn-bg:#b85539;
   --btn-ink:#fff8ee;
-  --sky:#8cc6e8;           /* puzzles.json skyBlue — the app icon's ground */
-  --shelf:#d3b087;         /* ClayPalette.shelf */
-  --shelf-shadow:#7b5b3e;  /* ClayPalette.shelfShadow */
-  --star:#ffc94a;          /* StorePalette.star */
+  --sky:#8cc6e8;
+  --shelf:#d3b087;
+  --shelf-shadow:#7b5b3e;
+  --star:#ffc94a;
   --cast:rgba(123,91,62,.20);
   --cast-soft:rgba(123,91,62,.11);
 
@@ -366,6 +365,7 @@ footer p{max-width:34rem}
   .step-art--word{background:url(assets/img/word-dog-poster.webp) center/cover no-repeat}
 }
 </style>
+<link rel="stylesheet" href="aeo.css">
 </head>
 <body>
 <script>document.documentElement.classList.add("js");</script>
@@ -388,17 +388,14 @@ footer p{max-width:34rem}
       <div>
         <p class="label">Free on the App&nbsp;Store · iPhone &amp; iPad · Ages&nbsp;2–4</p>
         <h1>Clay animals, and the words that name them.</h1>
-        <p class="lead">ClayPals is a claymation puzzle toy for two-, three- and four-year-olds.
-          Twenty-three clay animals, each with its own little world. Finish a pal and it says
-          its own name out loud, spells it, and says it again.</p>
+        <p class="lead">ClayPals: Toddler Puzzles is a puzzle app for iPhone and iPad, made for children aged 2&nbsp;to&nbsp;4. It has 23 clay animals that say their own names. There are no ads or subscriptions. Three animals are free. An optional one-time purchase unlocks the other 20.</p>
         <div class="cta-row">
           <img class="appicon" src="assets/icon/icon-160.webp" width="160" height="160"
                decoding="async" alt="The ClayPals app icon: a yellow clay puppy on a sky-blue ground.">
           <a class="btn" data-cta="hero" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
             Download free <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <p class="btn-note">Three animals free forever. No ads, no subscription, no accounts,
-          and nothing about your child is collected.</p>
+        <p class="btn-note">The dog, duck and cow are free to keep. No ads or subscriptions.</p>
       </div>
 
       <div class="diorama">
@@ -407,7 +404,7 @@ footer p{max-width:34rem}
                srcset="assets/img/hero-scene-960.webp 960w, assets/img/hero-scene-1440.webp 1440w"
                sizes="(min-width:900px) 46vw, 92vw"
                width="960" height="717" fetchpriority="high" decoding="async"
-               alt="A clay backyard scene: green modelling-clay grass, a red dog house with a blue roof, a smiling sun and soft white clouds.">
+               alt="A clay backyard scene: green modeling-clay grass, a red dog house with a blue roof, a smiling sun and soft white clouds.">
         </div>
         <div class="pal-shadow" aria-hidden="true"></div>
         <img class="pal" src="assets/img/hero-dog-440.webp"
@@ -423,24 +420,14 @@ footer p{max-width:34rem}
   <section class="band">
     <div class="wrap">
       <div class="prose reveal">
-        <p class="label">How a pal goes together</p>
-        <h2>Two gentle puzzles, then the word.</h2>
-        <p class="lead">The same three beats every time, in the same order, for every animal.
-          Nothing is timed, and a puzzle waits as long as they need.</p>
+        <p class="label">How it works</p>
+        <h2>Two easy puzzles, then the word.</h2>
+        <p class="lead">Every animal works the same way, in three steps.
+          Nothing is timed. Your child can take as long as they need.</p>
       </div>
 
       <ol class="steps">
         <li class="step reveal">
-          <!-- The dog, not the penguin. The three cards are one sentence — slide
-               the dog home, build the dog back, the dog says its word — and
-               changing the subject halfway breaks it. Variety is the roster
-               section's job; it shows all 23.
-               On the deliberate overlap with the hero: the hero DROPS a bare
-               cutout from above onto a bare scene. This is the app itself —
-               the whole pal travelling SIDEWAYS off the shelf into a silhouette,
-               with the tray and the home button in frame. Same dog, different
-               axis, different context, so the two read as one motif rather than
-               one animation played twice. -->
           <div class="step-art step-art--slide">
             <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
                    poster="assets/img/slide-dog-poster.webp"
@@ -450,38 +437,21 @@ footer p{max-width:34rem}
             </video>
           </div>
           <div class="step-head"><span class="step-num" aria-hidden="true">1</span><h3>Slide the animal home</h3></div>
-          <p>The puppy into the sunny backyard, the penguin onto the ice, the octopus into the
-            reef. One big target, generous snapping, no rotation to fight with — and no wrong
-            answers to get.</p>
+          <p>Put the puppy in the sunny backyard, the penguin on the ice, the octopus in the reef. The target is big, pieces snap in easily, and nothing needs turning. There are no wrong answers.</p>
         </li>
         <li class="step reveal">
-          <!-- The still that used to sit here showed the puppy mid-split, and it
-               read as a rendering glitch rather than as puzzle pieces. This is the
-               real Layer 2, recorded off the app: three pieces lifted from the
-               shelf and pressed into the silhouette. `muted` AND `playsinline` are
-               both load-bearing — iOS Safari refuses to autoplay without either,
-               and a parent opening this from a text message is the case that
-               matters most. WebM first so Chrome and Firefox take the smaller
-               file; Safari falls through to the H.264 MP4. -->
           <div class="step-art step-art--build">
             <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
                    poster="assets/img/build-dog-poster.webp"
-                   aria-label="The clay puppy's three pieces — body, head and paws — lifted one at a time from the shelf and pressed into his silhouette until he is whole again.">
+                   aria-label="The clay puppy's three pieces (body, head and paws) lifted one at a time from the shelf and pressed into his silhouette until he is whole again.">
               <source src="assets/video/build-dog.webm" type="video/webm">
               <source src="assets/video/build-dog.mp4" type="video/mp4">
             </video>
           </div>
           <div class="step-head"><span class="step-num" aria-hidden="true">2</span><h3>Build it back</h3></div>
-          <p>The pal splits into three or four big clay pieces, sized for a two-year-old's grip.
-            A wiggle, a satisfying pop, and it's whole again. A piece in the wrong place just
-            springs back.</p>
+          <p>The animal breaks into three or four big clay pieces, sized for a two-year-old's hands. Put them back and it is whole again. A piece in the wrong place just pops back out.</p>
         </li>
         <li class="step reveal">
-          <!-- The dog completion film the app itself plays, straight from the
-               bundle (ClayPals/Resources/video/dog_completion.mp4), transcoded off
-               HEVC because Chrome and Firefox will not decode it. The word card
-               stays on top rather than being replaced by the film: the panel is
-               about the WORD, and card-over-film is exactly what a child sees. -->
           <div class="step-art step-art--word">
             <video width="640" height="512" autoplay muted loop playsinline preload="metadata"
                    poster="assets/img/word-dog-poster.webp"
@@ -492,9 +462,7 @@ footer p{max-width:34rem}
             <div class="wordcard" aria-hidden="true"><span>D</span><span>O</span><span>G</span></div>
           </div>
           <div class="step-head"><span class="step-num" aria-hidden="true">3</span><h3>Then it says the word</h3></div>
-          <p>The finished pal says its own name out loud. The letters are named one at a time on
-            a little clay card, then the whole word again. A few seconds of print — never a quiz,
-            and a parent can switch it off in one tap.</p>
+          <p>The finished animal says its name out loud. Each letter is named on a little clay card, then the whole word is said again. It takes a few seconds and is never a quiz. A parent can turn it off with one tap.</p>
         </li>
       </ol>
       <script>
@@ -528,8 +496,7 @@ footer p{max-width:34rem}
       <div class="prose reveal">
         <p class="label">What's not in it</p>
         <h2 class="quiet-statement">It's the quiet one.</h2>
-        <p class="quiet-sub">No ads, no scores, no streaks, nothing collected — and after one
-          purchase it never asks you for anything again.</p>
+        <p class="quiet-sub">Puzzles without ads, scores or streaks. The full set is one optional purchase.</p>
       </div>
 
       <ul class="chips reveal">
@@ -538,35 +505,25 @@ footer p{max-width:34rem}
         <li><b>No</b> streaks</li>
         <li><b>No</b> timers</li>
         <li><b>No</b> notifications</li>
-        <li><b>No</b> accounts</li>
-        <li><b>No</b> microphone</li>
-        <li><b>No</b> data collected</li>
-        <li><b>No</b> links out of the app</li>
         <li><b>No</b> way to lose</li>
       </ul>
 
       <div class="proofs">
         <div class="proof reveal">
-          <h3>It respects your room</h3>
-          <p>Flip the hardware mute switch and ClayPals goes silent. Start a podcast and it plays
-            politely underneath instead of taking over your audio. The background music is quiet
-            by default and switches off in one tap.</p>
+          <h3>Quiet when you need it</h3>
+          <p>The puzzles use sounds and spoken words alongside their pictures.</p>
         </div>
         <div class="proof reveal">
-          <h3>The same four seconds, every time</h3>
-          <p>Every celebration is one continuous four-second clip — no cuts, no music sting, no
-            flashing. The same gentle moment for that animal, however many times it is finished.</p>
+          <h3>A short celebration</h3>
+          <p>A short animation celebrates putting the animal back together.</p>
         </div>
         <div class="proof reveal">
-          <h3>Nothing leaves the device</h3>
-          <p>No analytics, no tracking, no accounts, no microphone and no speech recognition —
-            ClayPals never listens. It plays fully in airplane mode. Apple privacy label:
-            Data Not Collected.</p>
+          <h3>App privacy and the website</h3>
+          <p>The U.S. App Store listing reports “Data Not Collected” for this app. Our separate website uses Google Analytics 4 and the Meta Pixel to understand traffic and measure ads. See our <a href="privacy.html">privacy policy</a>.</p>
         </div>
       </div>
 
-      <p class="pace reveal">Big pieces for little fingers. No time limits, no wrong answers,
-        nothing to fall behind on — a puzzle waits as long as they need.</p>
+      <p class="pace reveal">Big pieces for little fingers. No time limits and no wrong answers. Your child can take as long as they need.</p>
     </div>
   </section>
 
@@ -574,10 +531,9 @@ footer p{max-width:34rem}
   <section class="band">
     <div class="wrap">
       <div class="prose reveal">
-        <p class="label">The roster</p>
-        <h2>Twenty-three pals, twenty-three little worlds.</h2>
-        <p class="lead">Farm, pond, savanna, ocean, night forest, coral reef. The dog, the duck
-          and the cow are free forever.</p>
+        <p class="label">All the animals</p>
+        <h2>23 animals, each with its own little world.</h2>
+        <p class="lead">From the farm to the coral reef. The dog, duck and cow are free to keep.</p>
       </div>
       <ul class="shelf" id="shelf">
         <li style="--i:0">
@@ -752,7 +708,7 @@ footer p{max-width:34rem}
   <section>
     <div class="wrap">
       <div class="prose reveal">
-        <p class="label">The whole business model</p>
+        <p class="label">Price</p>
         <h2>What's free, and what isn't.</h2>
       </div>
       <div class="price-card reveal">
@@ -760,46 +716,107 @@ footer p{max-width:34rem}
           <li>
             <span class="amount">Free</span>
             <h3>Dog, duck and cow</h3>
-            <p>Yours forever. Two full puzzles each, the word moment, every sound — no time
-              limit and no ads.</p>
+            <p>Free to keep. Each one has both puzzles, its word and all its sounds. No time limit and no ads.</p>
           </li>
           <li>
             <span class="amount">$4.99 once</span>
             <h3>The other twenty animals</h3>
-            <p>One optional in-app purchase. Not a subscription, not coins, not a bundle —
-              there is nothing else to buy, ever.</p>
+            <p>One optional in-app purchase. It is not a subscription, coins or a bundle. There is nothing else to buy in the app.</p>
           </li>
         </ul>
-        <p class="fineprint">The purchase sits behind a parental gate a grown-up has to hold for
-          three seconds, and Family Sharing and Ask&nbsp;to&nbsp;Buy work as you would expect.
-          ClayPals is free to download, and the three free pals stay free whether you buy or not.</p>
+        <p class="fineprint">To buy, a grown-up has to hold a button for three seconds (a parental gate).
+          ClayPals: Toddler Puzzles is free to download. The three free animals stay free, whether you buy or not. The regular U.S. price is $4.99. Check the app for the current price in your storefront.</p>
       </div>
     </div>
   </section>
 
+  <!-- ── FAQ (generated from faq-*.json) ── -->
+
+
+<section class="faq" id="faq">
+  <div class="wrap prose-wide">
+    <p class="label">Questions parents ask</p>
+    <h2>Questions, answered.</h2>
+    <details>
+      <summary><h3>What is ClayPals: Toddler Puzzles?</h3></summary>
+      <p>ClayPals: Toddler Puzzles is a puzzle app for iPhone and iPad, made for children aged 2 to 4. It has 23 clay animals that say their own names. There are no ads or subscriptions. Three animals are free. An optional one-time purchase unlocks the other 20. It is made by Kai Ventures.</p>
+    </details>
+    <details>
+      <summary><h3>How much does ClayPals: Toddler Puzzles cost? Is it a subscription?</h3></summary>
+      <p>ClayPals: Toddler Puzzles is free to download, and the dog, duck and cow are free to keep. One optional in-app purchase, All Animals, unlocks the other 20 animals. The regular U.S. price is $4.99. Prices and offers vary by storefront; check the current price in the app. It is not a subscription. There are no coins, no bundles and no ads.</p>
+    </details>
+    <details>
+      <summary><h3>Why pay once for ClayPals: Toddler Puzzles instead of using a free app with ads?</h3></summary>
+      <p>With ClayPals: Toddler Puzzles, you can try three animals for free and unlock the rest with one optional in-app purchase. So there are no ads for your child to tap and no subscription to cancel. Many free kids&#x27; apps make money from ads, and many learning apps charge every month. Check an app&#x27;s privacy label before you choose.</p>
+    </details>
+    <details>
+      <summary><h3>What does the U.S. App Store list for ClayPals: Toddler Puzzles privacy?</h3></summary>
+      <p>The U.S. App Store privacy label for ClayPals: Toddler Puzzles says “Data Not Collected.” This is about the app, not the separate ClayPals website. Learn more: <a href="privacy.html">claypals.app/privacy.html</a>.</p>
+    </details>
+    <details>
+      <summary><h3>Where can I read the ClayPals: Toddler Puzzles privacy policy?</h3></summary>
+      <p>The privacy policy explains how ClayPals: Toddler Puzzles handles information and how the separate website works. Full policy: <a href="privacy.html">claypals.app/privacy.html</a>.</p>
+    </details>
+    <details>
+      <summary><h3>Does ClayPals: Toddler Puzzles work offline?</h3></summary>
+      <p>Yes. ClayPals: Toddler Puzzles works fully offline, including in airplane mode. You can use it on a plane, in a waiting room or anywhere without Wi-Fi. The optional unlock uses the App Store.</p>
+    </details>
+    <details>
+      <summary><h3>Which devices does ClayPals: Toddler Puzzles work on?</h3></summary>
+      <p>ClayPals: Toddler Puzzles works on iPhone and iPad with iOS 17 or later. It is not available for Android, and Apple lists it as not verified for Mac. The app is in English only. The puzzles can be played offline.</p>
+    </details>
+    <details>
+      <summary><h3>What age is ClayPals: Toddler Puzzles for?</h3></summary>
+      <p>ClayPals: Toddler Puzzles is made for children aged 2 to 4. The pieces are big enough for a two-year-old&#x27;s hands. Nothing is timed, and there are no wrong answers. On the App Store it has a 4+ age rating (suitable for all ages) and is in the Kids category for ages 5 and under.</p>
+    </details>
+    <details>
+      <summary><h3>How do I stop my toddler buying things in ClayPals: Toddler Puzzles?</h3></summary>
+      <p>In ClayPals: Toddler Puzzles, the only purchase is behind a parental gate: a grown-up has to hold a button for three seconds. There is only one optional unlock. Check the app for the price in your storefront.</p>
+    </details>
+    <details>
+      <summary><h3>Can I turn off the words in ClayPals: Toddler Puzzles?</h3></summary>
+      <p>Yes. The U.S. App Store description for ClayPals: Toddler Puzzles says the word feature can be turned off.</p>
+    </details>
+    <details>
+      <summary><h3>What is the difference between ClayPals: Toddler Puzzles and ClayPals: Fruits &amp; Veggies?</h3></summary>
+      <p>ClayPals: Toddler Puzzles and ClayPals: Fruits &amp; Veggies are separate ClayPals apps. Toddler Puzzles has clay animals, and Fruits &amp; Veggies has clay fruits and vegetables. Both are for ages 2 to 4 and play the same way. Each has its own free items and its own one-time unlock, so buying one does not unlock the other.</p>
+    </details>
+    <details>
+      <summary><h3>Is ClayPals a clay-modeling app?</h3></summary>
+      <p>No. ClayPals: Toddler Puzzles is a puzzle app with clay animation art. A child slides a clay animal into its scene, builds it back from big pieces and hears its name. It does not teach clay modeling or sculpting, and you do not need real clay or anything else to play.</p>
+    </details>
+  </div>
+</section>
+
   <!-- ── Closing ───────────────────────────────────────────────────────── -->
   <section class="closing">
     <div class="wrap prose" style="margin-inline:auto">
-      <h2 class="reveal">Twenty-three pals are waiting.</h2>
+      <h2 class="reveal">23 animals are ready to play.</h2>
       <p class="reveal"><a class="btn" data-cta="closing" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">
         Download free on the App&nbsp;Store <span class="arrow" aria-hidden="true">→</span></a></p>
-      <p class="btn-note reveal">Requires iOS&nbsp;17 or later. iPhone and iPad. Works completely
-        offline — airplanes, waiting rooms, grandma's house.</p>
+      <p class="btn-note reveal">Needs iOS&nbsp;17 or later, on iPhone or iPad. Works fully offline: on planes, in waiting rooms, at grandma's house.</p>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <p>ClayPals is made by a tiny independent studio. If something isn't right for your family,
-      email us — a human reads and answers every message.</p>
+    <p>ClayPals is made by a small independent studio. If something isn't right for your family, email us. A real person reads and answers every message.</p>
     <ul class="footlinks">
-      <li><a data-cta="footer" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">ClayPals on the App&nbsp;Store</a></li>
+      <li><a data-cta="footer" href="https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298">ClayPals: Toddler Puzzles on the App&nbsp;Store</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms (Apple standard license)</a></li>
       <li><a href="mailto:support@claypals.app">support@claypals.app</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><button type="button" class="linkbtn" data-cp-consent="reset">Privacy choices</button></li>
     </ul>
-    <p class="colophon">ClayPals: Toddler Puzzles · Kai Ventures.
+    <ul class="follow">
+      <li><a href="https://www.instagram.com/claypals.app/">Instagram</a></li>
+      <li><a href="https://www.facebook.com/profile.php?id=61593198490533">Facebook</a></li>
+    </ul>
+    <p class="colophon">ClayPals makes clay puzzle apps for toddlers aged 2 to 4.
+      ClayPals is published by Kai Ventures. On the App Store, the developer is listed as Mark Cruz.
+      ClayPals is a puzzle app, not a clay-modeling tutorial.
       Also from us: <a href="produce/">ClayPals: Fruits &amp; Veggies</a> (<a href="produce/privacy.html">privacy policy</a> · <a href="produce/terms.html">terms of use</a>).</p>
   </div>
 </footer>
@@ -824,14 +841,197 @@ footer p{max-width:34rem}
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"MobileApplication",
-  "name":"ClayPals: Toddler Puzzles",
-  "operatingSystem":"iOS 17.0 or later",
-  "applicationCategory":"EducationalApplication",
-  "url":"https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298",
-  "description":"A claymation puzzle toy for 2–4 year olds. Fit the clay animal into its scene, then rebuild it from big pieces. 23 animals, no ads, no data collected.",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://claypals.app/#org",
+      "name": "Kai Ventures",
+      "email": "support@claypals.app",
+      "brand": {
+        "@type": "Brand",
+        "@id": "https://claypals.app/#brand",
+        "name": "ClayPals",
+        "description": "ClayPals makes clay puzzle apps for toddlers aged 2 to 4. ClayPals is published by Kai Ventures.",
+        "url": "https://claypals.app/",
+        "sameAs": [
+          "https://www.instagram.com/claypals.app/",
+          "https://www.facebook.com/profile.php?id=61593198490533"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://claypals.app/#website",
+      "url": "https://claypals.app/",
+      "name": "ClayPals",
+      "publisher": {
+        "@id": "https://claypals.app/#org"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://claypals.app/#webpage",
+      "url": "https://claypals.app/",
+      "name": "ClayPals: Toddler Puzzles, a clay puzzle app for ages 2 to 4",
+      "isPartOf": {
+        "@id": "https://claypals.app/#website"
+      },
+      "about": {
+        "@id": "https://claypals.app/#app"
+      },
+      "dateModified": "2026-11-25",
+      "inLanguage": "en",
+      "relatedLink": "https://claypals.app/produce/"
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://claypals.app/#app",
+      "name": "ClayPals: Toddler Puzzles",
+      "description": "ClayPals: Toddler Puzzles is a puzzle app for iPhone and iPad, made for children aged 2 to 4. It has 23 clay animals that say their own names. There are no ads or subscriptions. Three animals are free. An optional one-time purchase unlocks the other 20.",
+      "url": "https://claypals.app/",
+      "sameAs": [
+        "https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298"
+      ],
+      "installUrl": "https://apps.apple.com/us/app/claypals-toddler-puzzles/id6794948298",
+      "operatingSystem": "iOS 17.0 or later",
+      "applicationCategory": "EducationalApplication",
+      "applicationSubCategory": "Kids",
+      "availableOnDevice": [
+        "iPhone",
+        "iPad"
+      ],
+      "inLanguage": "en",
+      "contentRating": "4+",
+      "isFamilyFriendly": true,
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 2,
+        "suggestedMaxAge": 4
+      },
+      "publisher": {
+        "@id": "https://claypals.app/#org"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Mark Cruz",
+        "description": "Developer name shown on the App Store for ClayPals apps, published by Kai Ventures"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free download",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is ClayPals: Toddler Puzzles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClayPals: Toddler Puzzles is a puzzle app for iPhone and iPad, made for children aged 2 to 4. It has 23 clay animals that say their own names. There are no ads or subscriptions. Three animals are free. An optional one-time purchase unlocks the other 20. It is made by Kai Ventures."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does ClayPals: Toddler Puzzles cost? Is it a subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClayPals: Toddler Puzzles is free to download, and the dog, duck and cow are free to keep. One optional in-app purchase, All Animals, unlocks the other 20 animals. The regular U.S. price is $4.99. Prices and offers vary by storefront; check the current price in the app. It is not a subscription. There are no coins, no bundles and no ads."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why pay once for ClayPals: Toddler Puzzles instead of using a free app with ads?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "With ClayPals: Toddler Puzzles, you can try three animals for free and unlock the rest with one optional in-app purchase. So there are no ads for your child to tap and no subscription to cancel. Many free kids' apps make money from ads, and many learning apps charge every month. Check an app's privacy label before you choose."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the U.S. App Store list for ClayPals: Toddler Puzzles privacy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The U.S. App Store privacy label for ClayPals: Toddler Puzzles says “Data Not Collected.” This is about the app, not the separate ClayPals website. Learn more: claypals.app/privacy.html."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I read the ClayPals: Toddler Puzzles privacy policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The privacy policy explains how ClayPals: Toddler Puzzles handles information and how the separate website works. Full policy: claypals.app/privacy.html."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ClayPals: Toddler Puzzles work offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. ClayPals: Toddler Puzzles works fully offline, including in airplane mode. You can use it on a plane, in a waiting room or anywhere without Wi-Fi. The optional unlock uses the App Store."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which devices does ClayPals: Toddler Puzzles work on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClayPals: Toddler Puzzles works on iPhone and iPad with iOS 17 or later. It is not available for Android, and Apple lists it as not verified for Mac. The app is in English only. The puzzles can be played offline."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What age is ClayPals: Toddler Puzzles for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClayPals: Toddler Puzzles is made for children aged 2 to 4. The pieces are big enough for a two-year-old's hands. Nothing is timed, and there are no wrong answers. On the App Store it has a 4+ age rating (suitable for all ages) and is in the Kids category for ages 5 and under."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I stop my toddler buying things in ClayPals: Toddler Puzzles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In ClayPals: Toddler Puzzles, the only purchase is behind a parental gate: a grown-up has to hold a button for three seconds. There is only one optional unlock. Check the app for the price in your storefront."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I turn off the words in ClayPals: Toddler Puzzles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The U.S. App Store description for ClayPals: Toddler Puzzles says the word feature can be turned off."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between ClayPals: Toddler Puzzles and ClayPals: Fruits & Veggies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClayPals: Toddler Puzzles and ClayPals: Fruits & Veggies are separate ClayPals apps. Toddler Puzzles has clay animals, and Fruits & Veggies has clay fruits and vegetables. Both are for ages 2 to 4 and play the same way. Each has its own free items and its own one-time unlock, so buying one does not unlock the other."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ClayPals a clay-modeling app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ClayPals: Toddler Puzzles is a puzzle app with clay animation art. A child slides a clay animal into its scene, builds it back from big pieces and hears its name. It does not teach clay modeling or sculpting, and you do not need real clay or anything else to play."
+      }
+    }
+  ]
 }
 </script>
 </body>
